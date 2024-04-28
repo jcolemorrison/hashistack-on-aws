@@ -1,0 +1,10 @@
+.terraform
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.backup
+.DS_Store
+
+secrets/
+**/backend.tf
+**.pem
