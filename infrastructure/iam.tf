@@ -1,13 +1,16 @@
+# Fetch the certificate details of the EKS cluster's OIDC provider
 data "tls_certificate" "cluster" {
   url = aws_eks_cluster.cluster.identity.0.oidc.0.issuer
 }
 
+# Create an IAM OIDC provider for the EKS cluster
 resource "aws_iam_openid_connect_provider" "oidc_provider" {
   client_id_list  = ["sts.${data.aws_partition.current.dns_suffix}"]
   thumbprint_list = [data.tls_certificate.cluster.certificates[0].sha1_fingerprint]
   url             = aws_eks_cluster.cluster.identity[0].oidc[0].issuer
 }
 
+# Create an IAM role for the EKS cluster
 resource "aws_iam_role" "eks_cluster" {
   name = "${project_name}-eks-cluster"
 
@@ -35,6 +38,7 @@ resource "aws_iam_role_policy_attachment" "eks_vpc_controller" {
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AmazonEKSVPCResourceController"
 }
 
+# Create an IAM role for the EKS node group
 resource "aws_iam_role" "eks_node_group" {
   name = "${var.project_name}-node-group"
 
@@ -72,7 +76,7 @@ resource "aws_iam_role_policy_attachment" "node_group_fluent_bit" {
   policy_arn = aws_iam_policy.fluent_bit.arn
 }
 
-# Fluent Bit Logging for EKS
+# Create an IAM role for Fluent Bit logging
 resource "aws_iam_role" "fluent_bit" {
   name = "fluent-bit"
   assume_role_policy = jsonencode({
@@ -99,7 +103,7 @@ resource "aws_iam_role_policy_attachment" "fluent_bit" {
   policy_arn = aws_iam_policy.fluent_bit.arn
 }
 
-# AWS Load Balancer Controller
+# Create an IAM role for the AWS Load Balancer Controller
 resource "aws_iam_role" "aws_lb_controller" {
   name = "aws-lb-controller"
   assume_role_policy = jsonencode({
@@ -121,11 +125,13 @@ resource "aws_iam_role" "aws_lb_controller" {
   })
 }
 
+# Attach the AWSLoadBalancerControllerIAMPolicy to the AWS Load Balancer Controller role
 resource "aws_iam_role_policy_attachment" "aws_lb_controller" {
   role       = aws_iam_role.aws_lb_controller.name
   policy_arn = aws_iam_policy.aws_lb_controller.arn
 }
 
+# Define the AWSLoadBalancerControllerIAMPolicy
 resource "aws_iam_policy" "aws_lb_controller" {
   name        = "AWSLoadBalancerControllerIAMPolicy"
   description = "Policy for AWS Load Balancer Controller"
