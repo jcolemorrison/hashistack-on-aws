@@ -6,7 +6,7 @@ resource "aws_eks_cluster" "cluster" {
     subnet_ids = module.vpc.private_subnet_ids
     endpoint_public_access  = true
     endpoint_private_access = true
-    # TBD: security_group_ids
+    security_group_ids = [aws_security_group.eks_control_plane.id]
   }
 
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
@@ -37,8 +37,8 @@ resource "aws_eks_node_group" "node_group" {
 
   remote_access {
     ec2_ssh_key = var.ec2_kepair_name // replace with your key pair name
-    # TBD source_security_group_ids
-    # source_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
+    # TBD security groups for remote access
+    # source_security_group_ids = [aws_security_group.worker_remote_access.id]
   }
 
   update_config {
