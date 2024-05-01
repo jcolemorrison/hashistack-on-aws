@@ -6,7 +6,6 @@ resource "aws_eks_cluster" "cluster" {
     subnet_ids = module.vpc.private_subnet_ids
     endpoint_public_access  = true
     endpoint_private_access = true
-    security_group_ids = [aws_security_group.eks_control_plane.id]
   }
 
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
