@@ -21,9 +21,10 @@ variable "aws_default_region" {
 variable "vpc_cidr_block" {
   type        = string
   description = "Cidr block for the VPC."
+  default     = "10.1.0.0/16"
 }
 
 variable "ec2_kepair_name" {
   type        = string
-  description = "The name of the EC2 key pair to use for remote access." 
+  description = "The name of the EC2 key pair to use for remote access."
 }

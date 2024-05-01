@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "cluster" {
   role_arn = aws_iam_role.eks_cluster.arn
 
   vpc_config {
-    subnet_ids = module.vpc.private_subnet_ids
+    subnet_ids              = module.vpc.private_subnet_ids
     endpoint_public_access  = true
     endpoint_private_access = true
   }
@@ -14,7 +14,7 @@ resource "aws_eks_cluster" "cluster" {
     provider {
       key_arn = aws_kms_key.eks_cluster.arn
     }
-    resources        = ["secrets"]
+    resources = ["secrets"]
   }
 
   depends_on = [
