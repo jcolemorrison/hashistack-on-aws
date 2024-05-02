@@ -12,7 +12,7 @@ resource "aws_iam_openid_connect_provider" "oidc_provider" {
 
 # Create an IAM role for the EKS cluster
 resource "aws_iam_role" "eks_cluster" {
-  name = "${project_name}-eks-cluster"
+  name = "${var.project_name}-eks-cluster"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -57,17 +57,17 @@ resource "aws_iam_role" "eks_node_group" {
 }
 
 resource "aws_iam_role_policy_attachment" "node_group_AmazonEKSWorkerNodePolicy" {
-  role       = aws_iam_role.node_group.name
+  role       = aws_iam_role.eks_node_group.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "node_group_AmazonEKS_CNI_Policy" {
-  role       = aws_iam_role.node_group.name
+  role       = aws_iam_role.eks_node_group.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
 resource "aws_iam_role_policy_attachment" "node_group_AmazonEC2ContainerRegistryReadOnly" {
-  role       = aws_iam_role.node_group.name
+  role       = aws_iam_role.eks_node_group.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
