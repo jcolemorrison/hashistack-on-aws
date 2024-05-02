@@ -21,7 +21,7 @@ variable "aws_default_region" {
 variable "vpc_cidr_block" {
   type        = string
   description = "Cidr block for the VPC."
-  default     = "10.1.0.0/16"
+  default     = "10.0.0.0/16"
 }
 
 variable "ec2_kepair_name" {
