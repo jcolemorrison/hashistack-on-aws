@@ -28,3 +28,9 @@ variable "ec2_kepair_name" {
   type        = string
   description = "The name of the EC2 key pair to use for remote access."
 }
+
+variable "eks_cluster_version" {
+  type        = string
+  description = "The version of Kubernetes for EKS to use."
+  default     = "1.29"
+}
