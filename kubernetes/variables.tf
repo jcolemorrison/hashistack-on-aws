@@ -33,3 +33,13 @@ variable "aws_lb_controller_role_arn" {
   type        = string
   description = "The ARN of the IAM role for the AWS Load Balancer Controller."
 }
+
+variable "pod_cloudwatch_log_group_name" {
+  type        = string
+  description = "The name of the CloudWatch log group for pod logs." 
+}
+
+variable "pod_cloudwatch_logging_arn" {
+  type        = string
+  description = "The ARN of the IAM role for pod logging."
+}
