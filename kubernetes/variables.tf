@@ -43,3 +43,8 @@ variable "pod_cloudwatch_logging_arn" {
   type        = string
   description = "The ARN of the IAM role for pod logging."
 }
+
+variable "eks_oidc_provider_arn" {
+  type        = string
+  description = "The ARN of the OIDC provider for the EKS cluster."
+}

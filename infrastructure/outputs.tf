@@ -27,3 +27,8 @@ output "pod_cloudwatch_log_group_name" {
   value       = aws_cloudwatch_log_group.pod_logs.name
   description = "Name of the CloudWatch log group for pod logs"
 }
+
+output "eks_oidc_provider_arn" {
+  value       = aws_iam_openid_connect_provider.oidc_provider.arn
+  description = "ARN of the OIDC provider for the EKS cluster"
+}
