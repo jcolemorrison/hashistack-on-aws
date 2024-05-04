@@ -14,7 +14,7 @@ output "private_subnet_ids" {
 }
 
 output "aws_lb_controller_role_arn" {
-  value       = aws_iam_role.lb_controller.arn
+  value       = aws_iam_role.aws_lb_controller.arn
   description = "ARN of the IAM role for the AWS Load Balancer Controller"
 }
 
