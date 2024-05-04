@@ -17,7 +17,7 @@ resource "kubernetes_service_account" "aws_for_fluent_bit" {
 resource "helm_release" "aws_for_fluent_bit" {
   name       = "aws-for-fluent-bit"
   chart      = "aws-for-fluent-bit"
-  version    = "0.1.18"
+  version    = "0.1.33"
   repository = "https://aws.github.io/eks-charts"
   namespace  = kubernetes_namespace.aws_for_fluent_bit.metadata[0].name
 
