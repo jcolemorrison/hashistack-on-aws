@@ -4,16 +4,6 @@ resource "kubernetes_namespace" "aws_for_fluent_bit" {
   }
 }
 
-# resource "kubernetes_service_account" "aws_for_fluent_bit" {
-#   metadata {
-#     name        = "aws-for-fluent-bit"
-#     namespace   = kubernetes_namespace.aws_for_fluent_bit.metadata[0].name
-#     annotations = {
-#       "eks.amazonaws.com/role-arn" = var.pod_cloudwatch_logging_arn
-#     }
-#   }
-# }
-
 resource "helm_release" "aws_for_fluent_bit" {
   name       = "aws-for-fluent-bit"
   chart      = "aws-for-fluent-bit"
