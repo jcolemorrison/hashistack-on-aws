@@ -1,30 +1,66 @@
+resource "kubernetes_namespace" "ui" {
+  metadata {
+    name = "ui"
+  }
+}
+
+resource "kubernetes_manifest" "ingress_ui" {
+  manifest = {
+    apiVersion = "networking.k8s.io/v1"
+    kind       = "Ingress"
+    metadata = {
+      name      = "ui"
+      namespace = kubernetes_namespace.ui.metadata[0].name
+      annotations = {
+        "alb.ingress.kubernetes.io/scheme" = "internet-facing"
+        "alb.ingress.kubernetes.io/target-type" = "ip"
+        "alb.ingress.kubernetes.io/subnets" = join(",", var.public_subnet_ids)
+      }
+    }
+    spec = {
+      ingressClassName = "alb"
+      rules = [
+        {
+          http = {
+            paths = [
+              {
+                pathType = "Prefix"
+                path = "/"
+                backend = {
+                  service = {
+                    name = "ui"
+                    port = {
+                      number = 8080
+                    }
+                  }
+                }
+              },
+            ]
+          }
+        },
+      ]
+    }
+  }
+}
+
 resource "kubernetes_manifest" "service_ui" {
   manifest = {
     apiVersion = "v1"
     kind       = "Service"
     metadata = {
       name      = "ui"
-      namespace = "default"
-      annotations = {
-        # "service.beta.kubernetes.io/aws-load-balancer-ssl-cert" = var.certificate_arn
-        "service.beta.kubernetes.io/aws-load-balancer-scheme"   = "internet-facing"
-        "service.beta.kubernetes.io/aws-load-balancer-subnets"  = join(",", var.public_subnet_ids)
-        "service.beta.kubernetes.io/aws-load-balancer-type"     = "alb"
-      }
+      namespace = kubernetes_namespace.ui.metadata[0].name
     }
     spec = {
-      type = "LoadBalancer"
-      ports = [
-        {
-          name       = "http"
-          port       = 80
-          protocol   = "TCP"
-          targetPort = 8080
-        },
-      ]
       selector = {
         app = "ui"
       }
+      ports = [
+        {
+          port     = 8080
+          protocol = "TCP"
+        },
+      ]
     }
   }
 }
@@ -35,7 +71,7 @@ resource "kubernetes_manifest" "service_account_ui" {
     "kind"       = "ServiceAccount"
     "metadata" = {
       "name"      = "ui"
-      "namespace" = "default"
+      "namespace" = kubernetes_namespace.ui.metadata[0].name
     }
   }
 }
@@ -49,7 +85,7 @@ resource "kubernetes_manifest" "deployment_ui" {
         app = "ui"
       }
       name      = "ui"
-      namespace = "default"
+      namespace = kubernetes_namespace.ui.metadata[0].name
     }
     spec = {
       replicas = 1
