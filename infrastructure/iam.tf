@@ -90,7 +90,7 @@ resource "aws_iam_role" "fluent_bit" {
         },
         Condition = {
           StringEquals = {
-            "${aws_eks_cluster.cluster.identity[0].oidc[0].issuer}:sub" = "system:serviceaccount:logging:fluent-bit"
+            "${aws_eks_cluster.cluster.identity[0].oidc[0].issuer}:sub" = "system:serviceaccount:aws-for-fluent-bit:aws-for-fluent-bit"
           }
         }
       },
