@@ -4,44 +4,44 @@ resource "kubernetes_namespace" "ui" {
   }
 }
 
-# resource "kubernetes_manifest" "ingress_ui" {
-#   manifest = {
-#     apiVersion = "networking.k8s.io/v1"
-#     kind       = "Ingress"
-#     metadata = {
-#       name      = "ui"
-#       namespace = kubernetes_namespace.ui.metadata[0].name
-#       annotations = {
-#         "alb.ingress.kubernetes.io/scheme" = "internet-facing"
-#         "alb.ingress.kubernetes.io/target-type" = "ip"
-#         "alb.ingress.kubernetes.io/subnets" = join(",", var.public_subnet_ids)
-#       }
-#     }
-#     spec = {
-#       ingressClassName = "alb"
-#       rules = [
-#         {
-#           http = {
-#             paths = [
-#               {
-#                 pathType = "Prefix"
-#                 path = "/"
-#                 backend = {
-#                   service = {
-#                     name = "ui"
-#                     port = {
-#                       number = 8080
-#                     }
-#                   }
-#                 }
-#               },
-#             ]
-#           }
-#         },
-#       ]
-#     }
-#   }
-# }
+resource "kubernetes_manifest" "ingress_ui" {
+  manifest = {
+    apiVersion = "networking.k8s.io/v1"
+    kind       = "Ingress"
+    metadata = {
+      name      = "ui"
+      namespace = kubernetes_namespace.ui.metadata[0].name
+      annotations = {
+        "alb.ingress.kubernetes.io/scheme" = "internet-facing"
+        "alb.ingress.kubernetes.io/target-type" = "ip"
+        "alb.ingress.kubernetes.io/subnets" = join(",", var.public_subnet_ids)
+      }
+    }
+    spec = {
+      ingressClassName = "alb"
+      rules = [
+        {
+          http = {
+            paths = [
+              {
+                pathType = "Prefix"
+                path = "/"
+                backend = {
+                  service = {
+                    name = "ui"
+                    port = {
+                      number = 8080
+                    }
+                  }
+                }
+              },
+            ]
+          }
+        },
+      ]
+    }
+  }
+}
 
 resource "kubernetes_manifest" "service_ui" {
   manifest = {
