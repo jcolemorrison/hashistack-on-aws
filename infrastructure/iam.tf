@@ -1,3 +1,7 @@
+locals {
+  iam_oidc_url = replace(aws_eks_cluster.cluster.identity[0].oidc[0].issuer, "https://", "")
+}
+
 # Fetch the certificate details of the EKS cluster's OIDC provider
 data "tls_certificate" "cluster" {
   url = aws_eks_cluster.cluster.identity.0.oidc.0.issuer
@@ -90,7 +94,7 @@ resource "aws_iam_role" "fluent_bit" {
         },
         Condition = {
           StringEquals = {
-            "${aws_eks_cluster.cluster.identity[0].oidc[0].issuer}:sub" = "system:serviceaccount:aws-for-fluent-bit:aws-for-fluent-bit"
+            "${local.iam_oidc_url}:sub" = "system:serviceaccount:aws-for-fluent-bit:aws-for-fluent-bit"
           }
         }
       },
@@ -117,7 +121,7 @@ resource "aws_iam_role" "aws_lb_controller" {
         },
         Condition = {
           StringEquals = {
-            "${aws_eks_cluster.cluster.identity[0].oidc[0].issuer}:sub" = "system:serviceaccount:kube-system:aws-load-balancer-controller"
+            "${local.iam_oidc_url}:sub" = "system:serviceaccount:kube-system:aws-load-balancer-controller"
           }
         }
       },
