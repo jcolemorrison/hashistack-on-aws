@@ -124,11 +124,38 @@ resource "kubernetes_manifest" "deployment_ui" {
                   containerPort = 8080
                 },
               ]
+              resources = {
+                limits = {
+                  cpu    = "500m"
+                  memory = "512Mi"
+                }
+                requests = {
+                  cpu    = "250m"
+                  memory = "256Mi"
+                }
+              }
             },
           ]
           serviceAccountName = "ui"
         }
       }
     }
+  }
+}
+
+resource "kubernetes_horizontal_pod_autoscaler" "hpa_ui" {
+  metadata {
+    name      = "ui"
+    namespace = kubernetes_namespace.ui.metadata[0].name
+  }
+  spec {
+    max_replicas = 5
+    min_replicas = 1
+    scale_target_ref {
+      api_version = "apps/v1"
+      kind        = "Deployment"
+      name        = "ui"
+    }
+    target_cpu_utilization_percentage = 70
   }
 }

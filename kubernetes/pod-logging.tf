@@ -36,8 +36,9 @@ resource "helm_release" "aws_for_fluent_bit" {
     value = "aws-for-fluent-bit"
   }
 
-  set {
-    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = var.pod_cloudwatch_logging_arn
-  }
+  # Uses the EKS node role
+  # set {
+  #   name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+  #   value = var.pod_cloudwatch_logging_arn
+  # }
 }
