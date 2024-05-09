@@ -17,14 +17,21 @@ resource "hcp_aws_network_peering" "main" {
   peer_vpc_region = var.aws_default_region
 }
 
+resource "aws_vpc_peering_connection_accepter" "peer" {
+  vpc_peering_connection_id = hcp_aws_network_peering.main.provider_peering_id
+  auto_accept               = true
+}
+
+// This data source is the same as the resource above, but waits for the connection to be Active before returning.
+data "hcp_aws_network_peering" "main" {
+  hvn_id                = hcp_hvn.main.hvn_id
+  peering_id            = hcp_aws_network_peering.main.peering_id
+  wait_for_active_state = true
+}
+
 resource "hcp_hvn_route" "hcp-to-aws" {
   hvn_link         = hcp_hvn.main.self_link
   hvn_route_id     = "hcp-to-aws"
   destination_cidr = var.vpc_cidr_block
-  target_link      = hcp_aws_network_peering.main.self_link
-}
-
-resource "aws_vpc_peering_connection_accepter" "peer" {
-  vpc_peering_connection_id = hcp_aws_network_peering.main.provider_peering_id
-  auto_accept               = true
+  target_link      = data.hcp_aws_network_peering.main.self_link
 }
