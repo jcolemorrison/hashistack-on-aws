@@ -8,6 +8,10 @@ terraform {
       source  = "hashicorp/tls"
       version = "~> 4.0.5"
     }
+    hcp = {
+      source  = "hashicorp/hcp"
+      version = "~> 0.88"
+    }
   }
 }
 

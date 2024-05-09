@@ -34,3 +34,9 @@ variable "eks_cluster_version" {
   description = "The version of Kubernetes for EKS to use."
   default     = "1.29"
 }
+
+variable "hvn_cidr_block" {
+  type        = string
+  description = "Cidr block for the HCP HVN. Cannot overlap with VPC CIDR block."
+  default     = "172.25.16.0/20"
+}
