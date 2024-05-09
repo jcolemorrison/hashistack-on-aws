@@ -11,7 +11,7 @@ data "aws_arn" "peer" {
 
 resource "hcp_aws_network_peering" "main" {
   hvn_id          = hcp_hvn.main.hvn_id
-  peering_id      = "${project_name}-${var.aws_default_region}"
+  peering_id      = "${var.project_name}-${var.aws_default_region}"
   peer_vpc_id     = module.vpc.id
   peer_account_id = data.aws_caller_identity.current.account_id
   peer_vpc_region = var.aws_default_region
