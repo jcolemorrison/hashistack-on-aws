@@ -35,8 +35,34 @@ variable "eks_cluster_version" {
   default     = "1.29"
 }
 
+# HCP Variables
+
 variable "hvn_cidr_block" {
   type        = string
   description = "Cidr block for the HCP HVN. Cannot overlap with VPC CIDR block."
   default     = "172.25.16.0/20"
+}
+
+variable "hcp_consul_region" {
+  type        = string
+  description = "The region to deploy the HCP Consul cluster."
+  default     = "us-east-1"
+}
+
+variable "hcp_consul_version" {
+  type        = string
+  description = "The version of Consul to deploy."
+  default     = "1.17.0"
+}
+
+variable "hcp_consul_tier" {
+  type        = string
+  description = "The tier of the Consul cluster."
+  default     = "plus"
+}
+
+variable "hcp_consul_public_endpoint" {
+  type        = bool
+  description = "Whether to create a public endpoint for the Consul cluster."
+  default     = true
 }
