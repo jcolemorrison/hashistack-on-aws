@@ -65,3 +65,9 @@ variable "hcp_consul_cluster_id" {
   type        = string
   description = "The ID of the HCP Consul cluster."
 }
+
+variable "hcp_consul_bootstrap_token" {
+  type        = string
+  description = "The bootstrap token for the HCP Consul cluster."
+  sensitive   = true
+}
