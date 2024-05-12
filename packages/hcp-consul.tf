@@ -52,54 +52,54 @@ resource "kubernetes_secret" "hcp_consul_token" {
   type = "Opaque"
 }
 
-# resource "helm_release" "consul" {
-#   name       = "consul"
-#   namespace  = kubernetes_namespace.consul.metadata.0.name
-#   repository = "https://helm.releases.hashicorp.com"
-#   chart      = "consul"
-#   version    = "1.4.0"
+resource "helm_release" "consul" {
+  name       = "consul"
+  namespace  = kubernetes_namespace.consul.metadata.0.name
+  repository = "https://helm.releases.hashicorp.com"
+  chart      = "consul"
+  version    = "1.4.0"
 
-#   # Use the Helm configuration generated from HCP Consul
-#   values = [data.hcp_consul_agent_helm_config.main.config]
+  # Use the Helm configuration generated from HCP Consul
+  values = [data.hcp_consul_agent_helm_config.main.config]
 
-#   # Merge in additional values
-#   set {
-#     name  = "global.image"
-#     value = "hashicorp/consul-enterprise:${replace(data.hcp_consul_cluster.main.consul_version, "v", "")}-ent"
-#   }
+  # Merge in additional values
+  set {
+    name  = "global.image"
+    value = "hashicorp/consul-enterprise:${replace(data.hcp_consul_cluster.main.consul_version, "v", "")}-ent"
+  }
 
-#   set {
-#     name  = "global.enableConsulNamespaces"
-#     value = true
-#   }
+  set {
+    name  = "global.enableConsulNamespaces"
+    value = true
+  }
 
-#   set {
-#     name  = "global.metrics.enabled"
-#     value = true
-#   }
+  set {
+    name  = "global.metrics.enabled"
+    value = true
+  }
 
-#   set {
-#     name  = "global.metrics.enableAgentMetrics"
-#     value = true
-#   }
+  set {
+    name  = "global.metrics.enableAgentMetrics"
+    value = true
+  }
 
-#   set {
-#     name  = "server.enabled"
-#     value = false
-#   }
+  set {
+    name  = "server.enabled"
+    value = false
+  }
 
-#   set {
-#     name  = "connectInject.consulNamespaces.mirroringK8S"
-#     value = true
-#   }
+  set {
+    name  = "connectInject.consulNamespaces.mirroringK8S"
+    value = true
+  }
 
-#   set {
-#     name  = "controller.enabled"
-#     value = true
-#   }
+  set {
+    name  = "controller.enabled"
+    value = true
+  }
 
-#   depends_on = [
-#     kubernetes_secret.hcp_consul_encryption,
-#     kubernetes_secret.hcp_consul_token
-#   ]
-# }
+  depends_on = [
+    kubernetes_secret.hcp_consul_encryption,
+    kubernetes_secret.hcp_consul_token
+  ]
+}
