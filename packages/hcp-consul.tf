@@ -88,16 +88,6 @@ resource "helm_release" "consul" {
     value = false
   }
 
-  # set {
-  #   name  = "connectInject.consulNamespaces.mirroringK8S"
-  #   value = true
-  # }
-
-  # set {
-  #   name  = "controller.enabled"
-  #   value = true
-  # }
-
   depends_on = [
     kubernetes_secret.hcp_consul_encryption,
     kubernetes_secret.hcp_consul_token
