@@ -31,7 +31,7 @@ variable "aws_lb_controller_role_arn" {
 
 variable "pod_cloudwatch_log_group_name" {
   type        = string
-  description = "The name of the CloudWatch log group for pod logs." 
+  description = "The name of the CloudWatch log group for pod logs."
 }
 
 variable "pod_cloudwatch_logging_arn" {

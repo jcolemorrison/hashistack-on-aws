@@ -53,7 +53,7 @@ resource "kubernetes_secret" "hcp_consul_token" {
 }
 
 resource "helm_release" "consul" {
-  name        = "consul"
+  name       = "consul"
   namespace  = kubernetes_namespace.consul.metadata.0.name
   repository = "https://helm.releases.hashicorp.com"
   chart      = "consul"
@@ -64,17 +64,17 @@ resource "helm_release" "consul" {
 
   # Merge in additional values
   set {
-    name = "global.image"
-    value = "hashicorp/consul-enterprise:${replace(data.hcp_consul_cluster.cluster.consul_version, "v", "")}-ent"
+    name  = "global.image"
+    value = "hashicorp/consul-enterprise:${replace(data.hcp_consul_cluster.main.consul_version, "v", "")}-ent"
   }
 
   set {
-    name = "metrics.enabled"
+    name  = "metrics.enabled"
     value = true
   }
 
   set {
-    name = "metrics.enableAgentMetrics"
+    name  = "metrics.enableAgentMetrics"
     value = true
   }
 
