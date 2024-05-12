@@ -57,7 +57,7 @@ resource "helm_release" "consul" {
   namespace  = kubernetes_namespace.consul.metadata.0.name
   repository = "https://helm.releases.hashicorp.com"
   chart      = "consul"
-  version    = "1.3.0"
+  version    = "1.4.0"
 
   # Use the Helm configuration generated from HCP Consul
   values = [data.hcp_consul_agent_helm_config.main.config]
@@ -90,6 +90,11 @@ resource "helm_release" "consul" {
 
   set {
     name  = "connectInject.consulNamespaces.mirroringK8S"
+    value = true
+  }
+
+  set {
+    name  = "controller.enabled"
     value = true
   }
 
