@@ -7,12 +7,6 @@ module "eks_blueprints_addons" {
   cluster_version   = data.aws_eks_cluster.main.version
   oidc_provider_arn = var.eks_oidc_provider_arn
 
-  eks_addons = {
-    vpc_cni = {
-      most_recent = true
-    }
-  }
-
   enable_metrics_server = true
   metrics_server = {
     wait = true
@@ -22,4 +16,9 @@ module "eks_blueprints_addons" {
   cluster_autoscaler = {
     wait = true
   }
+}
+
+resource "aws_eks_addon" "vpc_cni" {
+  cluster_name = data.aws_eks_cluster.main.id
+  addon_name   = "vpc-cni"
 }
