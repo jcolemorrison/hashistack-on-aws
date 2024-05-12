@@ -7,6 +7,12 @@ module "eks_blueprints_addons" {
   cluster_version   = data.aws_eks_cluster.main.version
   oidc_provider_arn = var.eks_oidc_provider_arn
 
+  eks_addons = {
+    vpc_cni = {
+      most_recent = true
+    }
+  }
+
   enable_metrics_server = true
   metrics_server = {
     wait = true
