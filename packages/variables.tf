@@ -18,11 +18,6 @@ variable "aws_default_region" {
   default     = "us-east-1"
 }
 
-variable "eks_cluster_name" {
-  type        = string
-  description = "The name of the EKS cluster."
-}
-
 variable "aws_lb_controller_version" {
   type        = string
   description = "The version of the AWS Load Balancer Controller."
@@ -44,7 +39,22 @@ variable "pod_cloudwatch_logging_arn" {
   description = "The ARN of the IAM role for pod logging."
 }
 
+variable "eks_cluster_name" {
+  type        = string
+  description = "The name of the EKS cluster."
+}
+
 variable "eks_oidc_provider_arn" {
   type        = string
   description = "The ARN of the OIDC provider for the EKS cluster."
+}
+
+variable "eks_cluster_api_endpoint" {
+  type        = string
+  description = "The API endpoint for the EKS cluster."
+}
+
+variable "hcp_hvn_id" {
+  type        = string
+  description = "The HVN ID for the HCP Consul cluster."
 }
