@@ -29,9 +29,16 @@ data "hcp_aws_network_peering" "main" {
   wait_for_active_state = true
 }
 
-resource "hcp_hvn_route" "hcp-to-aws" {
+resource "hcp_hvn_route" "hcp_to_aws" {
   hvn_link         = hcp_hvn.main.self_link
   hvn_route_id     = "hcp-to-aws"
   destination_cidr = var.vpc_cidr_block
   target_link      = data.hcp_aws_network_peering.main.self_link
+}
+
+# VPC Route Table Modifications
+resource "aws_route" "aws_to_hcp" {
+  route_table_id            = module.vpc.private_route_table_id
+  destination_cidr_block    = var.hvn_cidr_block
+  vpc_peering_connection_id = data.hcp_aws_network_peering.main.provider_peering_id
 }
