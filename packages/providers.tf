@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "~> 2.13.1"
     }
+    hcp = {
+      source  = "hashicorp/hcp"
+      version = "~> 0.88"
+    }
   }
 }
 
