@@ -37,3 +37,8 @@ output "eks_cluster_api_endpoint" {
   value       = aws_eks_cluster.cluster.endpoint
   description = "API endpoint for the EKS cluster"
 }
+
+output "hcp_hvn_id" {
+  value       = hcp_consul_cluster.main.hvn_id
+  description = "HVN ID for the HCP HVN"
+}
