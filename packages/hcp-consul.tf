@@ -69,6 +69,11 @@ resource "helm_release" "consul" {
   }
 
   set {
+    name  = "global.enableConsulNamespaces"
+    value = true
+  }
+
+  set {
     name  = "global.metrics.enabled"
     value = true
   }
