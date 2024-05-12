@@ -5,7 +5,7 @@ data "hcp_consul_cluster" "main" {
 # Fetches the Helm configuration for the Consul agent
 data "hcp_consul_agent_helm_config" "main" {
   cluster_id          = var.hcp_consul_cluster_id
-  kubernetes_endpoint = var.eks_cluster_api_endpoint
+  kubernetes_endpoint = replace(var.eks_cluster_api_endpoint, "https://", "")
 }
 
 # Fetches the Kubernetes secret values for the Consul agent used in above helm config
