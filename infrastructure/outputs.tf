@@ -40,10 +40,10 @@ output "eks_cluster_api_endpoint" {
 
 # HCP Outputs
 
-output "hcp_hvn_id" {
-  value       = hcp_consul_cluster.main.hvn_id
-  description = "HVN ID for the HCP HVN"
-}
+# output "hcp_hvn_id" {
+#   value       = hcp_hvn.main.hvn_id
+#   description = "HVN ID for the HCP HVN"
+# }
 
 # output "hcp_consul_cluster_id" {
 #   value       = hcp_consul_cluster.main.cluster_id
