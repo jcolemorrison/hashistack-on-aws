@@ -43,12 +43,6 @@ variable "hvn_cidr_block" {
   default     = "172.25.16.0/20"
 }
 
-variable "hcp_consul_region" {
-  type        = string
-  description = "The region to deploy the HCP Consul cluster."
-  default     = "us-east-1"
-}
-
 variable "hcp_consul_version" {
   type        = string
   description = "The version of Consul to deploy."
