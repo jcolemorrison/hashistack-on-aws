@@ -8,9 +8,9 @@ data "hcp_consul_agent_kubernetes_secret" "main" {
 }
 
 output "hcp_consul_agent_helm_config" {
-  value = data.hcp_consul_agent_helm_config.config
+  value = data.hcp_consul_agent_helm_config.main.config
 }
 
 output "hcp_consul_agent_kubernetes_secret" {
-  value = data.hcp_consul_agent_kubernetes_secret.secret
+  value = data.hcp_consul_agent_kubernetes_secret.main.secret
 }
