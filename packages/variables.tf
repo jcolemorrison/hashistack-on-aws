@@ -54,7 +54,14 @@ variable "eks_cluster_api_endpoint" {
   description = "The API endpoint for the EKS cluster."
 }
 
+# HCP Variables
+
 variable "hcp_hvn_id" {
   type        = string
   description = "The HVN ID for the HCP Consul cluster."
+}
+
+variable "hcp_consul_cluster_id" {
+  type        = string
+  description = "The ID of the HCP Consul cluster."
 }
