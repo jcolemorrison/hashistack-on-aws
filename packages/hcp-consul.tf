@@ -1,3 +1,7 @@
+data "hcp_consul_cluster" "main" {
+  cluster_id = var.hcp_consul_cluster_id
+}
+
 # Fetches the Helm configuration for the Consul agent
 data "hcp_consul_agent_helm_config" "main" {
   cluster_id          = var.hcp_consul_cluster_id
@@ -46,4 +50,36 @@ resource "kubernetes_secret" "hcp_consul_token" {
   }
 
   type = "Opaque"
+}
+
+resource "helm_release" "consul" {
+  name        = "consul"
+  namespace  = kubernetes_namespace.consul.metadata.0.name
+  repository = "https://helm.releases.hashicorp.com"
+  chart      = "consul"
+  version    = "1.4.0"
+
+  # Use the Helm configuration generated from HCP Consul
+  values = [data.hcp_consul_agent_helm_config.main.config]
+
+  # Merge in additional values
+  set {
+    name = "global.image"
+    value = "hashicorp/consul-enterprise:${replace(data.hcp_consul_cluster.cluster.consul_version, "v", "")}-ent"
+  }
+
+  set {
+    name = "metrics.enabled"
+    value = true
+  }
+
+  set {
+    name = "metrics.enableAgentMetrics"
+    value = true
+  }
+
+  depends_on = [
+    kubernetes_secret.hcp_consul_encryption,
+    kubernetes_secret.hcp_consul_token
+  ]
 }
