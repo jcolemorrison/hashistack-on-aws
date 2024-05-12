@@ -83,10 +83,10 @@ resource "helm_release" "consul" {
     value = true
   }
 
-  set {
-    name  = "connectInject.default"
-    value = true
-  }
+  # set {
+  #   name  = "connectInject.default"
+  #   value = true
+  # }
 
   depends_on = [
     kubernetes_secret.hcp_consul_encryption,
