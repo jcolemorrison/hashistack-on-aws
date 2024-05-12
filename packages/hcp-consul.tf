@@ -69,12 +69,17 @@ resource "helm_release" "consul" {
   }
 
   set {
-    name  = "metrics.enabled"
+    name  = "global.metrics.enabled"
     value = true
   }
 
   set {
-    name  = "metrics.enableAgentMetrics"
+    name  = "global.metrics.enableAgentMetrics"
+    value = true
+  }
+
+  set {
+    name  = "connectInject.default"
     value = true
   }
 
