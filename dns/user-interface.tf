@@ -8,6 +8,8 @@ resource "kubernetes_annotations" "ui_alb_ssl" {
 
   annotations = {
     "alb.ingress.kubernetes.io/certificate-arn" = aws_acm_certificate.ui_subdomain.arn
+    "alb.ingress.kubernetes.io/listen-ports" = "[{\"HTTP\": 80}, {\"HTTPS\":443}]"
+    "alb.ingress.kubernetes.io/ssl-redirect" = "443"
   }
   # These annotations will be applied to the Pods created by the Deployment
   # template_annotations = {
