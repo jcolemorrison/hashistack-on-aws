@@ -7,5 +7,5 @@ data "aws_lb" "ui" {
 }
 
 output "ui_lb_dns_name" {
-  value = aws_lb.ui.dns_name
+  value = data.aws_lb.ui.dns_name
 }
