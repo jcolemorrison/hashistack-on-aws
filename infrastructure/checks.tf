@@ -6,6 +6,6 @@ check "eks_node_group_status" {
 
   assert {
     condition = data.aws_eks_node_group.current.status == "ACTIVE"
-    error_message = format("Node group %s should be in state ACTIVE", data.aws_eks_node_group.node_group.node_group_name)
+    error_message = format("Node group %s should be in state ACTIVE", data.aws_eks_node_group.current.node_group_name)
   }
 }
