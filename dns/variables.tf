@@ -29,6 +29,18 @@ variable "ui_stack_name" {
   default     = "ui/ui"
 }
 
+# Route53 and ACM
+
+variable "public_domain_name" {
+  type        = string
+  description = "The public domain name. i.e. hashidemo.com"
+}
+
+variable "public_subdomain_name" {
+  type        = string
+  description = "The public domain name. i.e. hashistackaws.hashidemo.com"
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {
