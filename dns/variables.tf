@@ -1,14 +1,14 @@
 variable "project_name" {
   type        = string
   description = "The name of the project.  Used for naming resources."
-  default     = "hashistack-apps"
+  default     = "hashistack-dns"
 }
 
 variable "aws_default_tags" {
   type        = map(string)
   description = "Default tags added to all AWS resources."
   default = {
-    Project = "hashistack-apps"
+    Project = "hashistack-dns"
   }
 }
 
@@ -23,21 +23,10 @@ variable "eks_cluster_name" {
   description = "The name of the EKS cluster."
 }
 
-variable "default_container_image" {
+variable "ui_stack_name" {
   type        = string
-  description = "Default service container image"
-  default     = "nicholasjackson/fake-service:v0.26.0"
-}
-
-variable "public_subnet_ids" {
-  type        = list(string)
-  description = "The list of public subnet IDs."
-}
-
-variable "ui_service_name" {
-  type        = string
-  description = "The name of the UI service. Used for namespace and name."
-  default     = "ui"
+  description = "The namespace / name of the UI ingress."
+  default     = "ui/ui"
 }
 
 ### Must be set in the workspace or via the CLI
@@ -50,4 +39,9 @@ variable "hcp_terraform_organization_name" {
 variable "hcp_terraform_infrastructure_workspace_name" {
   type        = string
   description = "The name of the infrastructure workspace."
+}
+
+variable "hcp_terraform_services_workspace_name" {
+  type        = string
+  description = "The name of the services workspace."
 }

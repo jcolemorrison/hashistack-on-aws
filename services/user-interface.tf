@@ -1,6 +1,6 @@
 resource "kubernetes_namespace" "ui" {
   metadata {
-    name = "ui"
+    name = var.ui_service_name
   }
 }
 
@@ -9,7 +9,7 @@ resource "kubernetes_manifest" "ingress_ui" {
     apiVersion = "networking.k8s.io/v1"
     kind       = "Ingress"
     metadata = {
-      name      = "ui"
+      name      = var.ui_service_name
       namespace = kubernetes_namespace.ui.metadata[0].name
       annotations = {
         "alb.ingress.kubernetes.io/scheme" = "internet-facing"
@@ -28,7 +28,7 @@ resource "kubernetes_manifest" "ingress_ui" {
                 path = "/"
                 backend = {
                   service = {
-                    name = "ui"
+                    name = var.ui_service_name
                     port = {
                       number = 8080
                     }
@@ -48,12 +48,12 @@ resource "kubernetes_manifest" "service_ui" {
     apiVersion = "v1"
     kind       = "Service"
     metadata = {
-      name      = "ui"
+      name      = var.ui_service_name
       namespace = kubernetes_namespace.ui.metadata[0].name
     }
     spec = {
       selector = {
-        app = "ui"
+        app = var.ui_service_name
       }
       ports = [
         {
@@ -70,7 +70,7 @@ resource "kubernetes_manifest" "service_account_ui" {
     "apiVersion" = "v1"
     "kind"       = "ServiceAccount"
     "metadata" = {
-      "name"      = "ui"
+      "name"      = var.ui_service_name
       "namespace" = kubernetes_namespace.ui.metadata[0].name
     }
   }
@@ -82,22 +82,22 @@ resource "kubernetes_manifest" "deployment_ui" {
     kind       = "Deployment"
     metadata = {
       labels = {
-        app = "ui"
+        app = var.ui_service_name
       }
-      name      = "ui"
+      name      = var.ui_service_name
       namespace = kubernetes_namespace.ui.metadata[0].name
     }
     spec = {
       replicas = 1
       selector = {
         matchLabels = {
-          app = "ui"
+          app = var.ui_service_name
         }
       }
       template = {
         metadata = {
           labels = {
-            app = "ui"
+            app = var.ui_service_name
           }
         }
         spec = {
@@ -110,7 +110,7 @@ resource "kubernetes_manifest" "deployment_ui" {
                 },
                 {
                   name  = "NAME"
-                  value = "ui"
+                  value = var.ui_service_name
                 },
                 {
                   name  = "MESSAGE"
@@ -118,7 +118,7 @@ resource "kubernetes_manifest" "deployment_ui" {
                 }
               ]
               image = var.default_container_image
-              name  = "ui"
+              name  = var.ui_service_name
               ports = [
                 {
                   containerPort = 8080
@@ -136,7 +136,7 @@ resource "kubernetes_manifest" "deployment_ui" {
               }
             },
           ]
-          serviceAccountName = "ui"
+          serviceAccountName = var.ui_service_name
         }
       }
     }
@@ -145,7 +145,7 @@ resource "kubernetes_manifest" "deployment_ui" {
 
 resource "kubernetes_horizontal_pod_autoscaler" "hpa_ui" {
   metadata {
-    name      = "ui"
+    name      = var.ui_service_name
     namespace = kubernetes_namespace.ui.metadata[0].name
   }
   spec {
@@ -154,7 +154,7 @@ resource "kubernetes_horizontal_pod_autoscaler" "hpa_ui" {
     scale_target_ref {
       api_version = "apps/v1"
       kind        = "Deployment"
-      name        = "ui"
+      name        = var.ui_service_name
     }
     target_cpu_utilization_percentage = 70
   }
