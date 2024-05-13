@@ -4,7 +4,7 @@ check "ui_service_live" {
   }
 
   assert {
-    condition = data.http.ui.status == 200
+    condition = data.http.ui.status_code == 200
     error_message = "UI service should return a 200 code"
   }
 }
