@@ -18,7 +18,7 @@ output "ui_lb_dns_name" {
 resource "aws_route53_record" "ui" {
   zone_id = data.aws_route53_zone.public_domain_name.zone_id
   name    = var.public_subdomain_name
-  type    = "A"
+  type    = "CNAME"
   ttl     = 60
   records = [data.aws_lb.ui.dns_name]
 }
