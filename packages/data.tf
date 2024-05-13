@@ -1,4 +1,5 @@
 # Grab remote outputs from the infrastructure workspace and use in place of the variables if available
+# Requirements: allow shared outputs between infrastructure -> packages workspace in HCP Terraform
 data "terraform_remote_state" "infrastructure" {
   backend = "remote"
 

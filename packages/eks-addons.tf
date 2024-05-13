@@ -5,7 +5,7 @@ module "eks_blueprints_addons" {
   cluster_name      = data.aws_eks_cluster.main.id
   cluster_endpoint  = data.aws_eks_cluster.main.endpoint
   cluster_version   = data.aws_eks_cluster.main.version
-  oidc_provider_arn = var.eks_oidc_provider_arn
+  oidc_provider_arn = local.eks_oidc_provider_arn
 
   enable_metrics_server = true
   metrics_server = {

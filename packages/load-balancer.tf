@@ -7,7 +7,7 @@ resource "helm_release" "load_balancer_controller" {
 
   set {
     name  = "clusterName"
-    value = var.eks_cluster_name
+    value = local.eks_cluster_name
   }
 
   set {
@@ -17,6 +17,6 @@ resource "helm_release" "load_balancer_controller" {
 
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = var.aws_lb_controller_role_arn
+    value = local.aws_lb_controller_role_arn
   }
 }

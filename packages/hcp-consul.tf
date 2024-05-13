@@ -1,16 +1,16 @@
 data "hcp_consul_cluster" "main" {
-  cluster_id = var.hcp_consul_cluster_id
+  cluster_id = local.hcp_consul_cluster_id
 }
 
 # Fetches the Helm configuration for the Consul agent
 data "hcp_consul_agent_helm_config" "main" {
-  cluster_id          = var.hcp_consul_cluster_id
-  kubernetes_endpoint = replace(var.eks_cluster_api_endpoint, "https://", "")
+  cluster_id          = local.hcp_consul_cluster_id
+  kubernetes_endpoint = replace(local.eks_cluster_api_endpoint, "https://", "")
 }
 
 # Fetches the Kubernetes secret values for the Consul agent used in above helm config
 data "hcp_consul_agent_kubernetes_secret" "main" {
-  cluster_id = var.hcp_consul_cluster_id
+  cluster_id = local.hcp_consul_cluster_id
 }
 
 locals {
@@ -41,12 +41,12 @@ resource "kubernetes_secret" "hcp_consul_encryption" {
 # Creates Kubernetes secret used for bootstrapping
 resource "kubernetes_secret" "hcp_consul_token" {
   metadata {
-    name      = "${var.hcp_consul_cluster_id}-bootstrap-token"
+    name      = "${local.hcp_consul_cluster_id}-bootstrap-token"
     namespace = kubernetes_namespace.consul.metadata.0.name
   }
 
   data = {
-    token = var.hcp_consul_bootstrap_token
+    token = local.hcp_consul_bootstrap_token
   }
 
   type = "Opaque"

@@ -18,7 +18,7 @@ resource "helm_release" "aws_for_fluent_bit" {
 
   set {
     name  = "cloudWatchLogs.logGroupName"
-    value = var.pod_cloudwatch_log_group_name
+    value = local.pod_cloudwatch_log_group_name
   }
 
   set {
