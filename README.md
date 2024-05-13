@@ -47,7 +47,7 @@ This step connects HCP Terraform to our Hashistack git repo, but enables us to t
 4. Follow these instructions on creating [Dynamic Credentials with the AWS Provider](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/dynamic-provider-credentials/aws-configuration).  This amounts to [configuring OIDC with HCP Terraform](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html) and attaching a trust policy to the IAM role created in #3.
     <details>
     <summary>An example trust policy would look like:</summary>
-        ```json
+
         {
             "Version": "2012-10-17",
             "Statement": [
@@ -120,7 +120,7 @@ This step connects HCP Terraform to our Hashistack git repo, but enables us to t
                 }
             ]
         }
-        ```
+
     </details>
 5. Add the `PowerUserAccess` permissions policy to your role from step #3 (the one we also attached the trust policy too.).
 6. Either attach the `IAMFullAccess` permissions policy to the role from step #3, or create an inline permissions policy that allows for `iam:*` permissions on `*` resources.  This is because Terraform will be creating and managing IAM resources.
