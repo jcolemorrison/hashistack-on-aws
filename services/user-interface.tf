@@ -17,6 +17,7 @@ resource "kubernetes_manifest" "ingress_ui" {
         "alb.ingress.kubernetes.io/subnets" = join(",", local.public_subnet_ids)
         "alb.ingress.kubernetes.io/listen-ports" = "[{\"HTTP\": 80}, {\"HTTPS\":443}]"
         "alb.ingress.kubernetes.io/ssl-redirect" = "443"
+        "alb.ingress.kubernetes.io/certificate-arn" = var.acm_certificate_arn
       } : {
         "alb.ingress.kubernetes.io/scheme" = "internet-facing"
         "alb.ingress.kubernetes.io/target-type" = "ip"
