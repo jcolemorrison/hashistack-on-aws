@@ -33,3 +33,15 @@ variable "public_subnet_ids" {
   type        = list(string)
   description = "The list of public subnet IDs."
 }
+
+### Must be set in the workspace or via the CLI
+
+variable "hcp_terraform_organization_name" {
+  type        = string
+  description = "The name of the Terraform organization."
+}
+
+variable "hcp_terraform_infrastructure_workspace_name" {
+  type        = string
+  description = "The name of the infrastructure workspace."
+}

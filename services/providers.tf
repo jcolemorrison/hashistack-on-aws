@@ -20,11 +20,11 @@ provider "aws" {
 
 # Alternatively you could pass these values via workspaces, variables, TFE provider, or TF State
 data "aws_eks_cluster" "main" {
-  name = var.eks_cluster_name
+  name = local.eks_cluster_name
 }
 
 data "aws_eks_cluster_auth" "main" {
-  name = var.eks_cluster_name
+  name = local.eks_cluster_name
 }
 
 provider "kubernetes" {
