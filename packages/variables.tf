@@ -71,3 +71,15 @@ variable "hcp_consul_bootstrap_token" {
   description = "The bootstrap token for the HCP Consul cluster."
   sensitive   = true
 }
+
+### Must be set in the workspace or via the CLI
+
+variable "hcp_terraform_organization_name" {
+  type        = string
+  description = "The name of the Terraform organization."
+}
+
+variable "hcp_terraform_infrastructure_workspace_name" {
+  type        = string
+  description = "The name of the infrastructure workspace."
+}
