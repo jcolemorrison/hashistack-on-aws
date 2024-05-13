@@ -44,7 +44,7 @@ variable "ui_service_name" {
 
 variable "acm_certificate_arn" {
   type        = string
-  description = "The ARN of the ACM certificate."
+  description = "The ARN of the ACM certificate used for HTTPS on the UI service."
   default = null
 }
 
