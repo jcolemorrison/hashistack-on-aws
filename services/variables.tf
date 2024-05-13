@@ -40,6 +40,14 @@ variable "ui_service_name" {
   default     = "ui"
 }
 
+### Optionally set AFTER deploying the DNS project
+
+variable "acm_certificate_arn" {
+  type        = string
+  description = "The ARN of the ACM certificate."
+  default = null
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {

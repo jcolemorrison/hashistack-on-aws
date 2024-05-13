@@ -11,12 +11,16 @@ resource "kubernetes_manifest" "ingress_ui" {
     metadata = {
       name      = var.ui_service_name
       namespace = kubernetes_namespace.ui.metadata[0].name
-      annotations = {
+      annotations = var.acm_certificate_arn != null ? {
         "alb.ingress.kubernetes.io/scheme" = "internet-facing"
         "alb.ingress.kubernetes.io/target-type" = "ip"
         "alb.ingress.kubernetes.io/subnets" = join(",", local.public_subnet_ids)
         "alb.ingress.kubernetes.io/listen-ports" = "[{\"HTTP\": 80}, {\"HTTPS\":443}]"
         "alb.ingress.kubernetes.io/ssl-redirect" = "443"
+      } : {
+        "alb.ingress.kubernetes.io/scheme" = "internet-facing"
+        "alb.ingress.kubernetes.io/target-type" = "ip"
+        "alb.ingress.kubernetes.io/subnets" = join(",", local.public_subnet_ids)
       }
     }
     spec = {
