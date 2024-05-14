@@ -10,6 +10,7 @@ resource "aws_eks_cluster" "cluster" {
 
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
+  # Enable encryption for k8s secrets
   encryption_config {
     provider {
       key_arn = aws_kms_key.eks_cluster.arn

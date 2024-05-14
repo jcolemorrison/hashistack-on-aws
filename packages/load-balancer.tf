@@ -1,3 +1,5 @@
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.7/
+# https://artifacthub.io/packages/helm/aws/aws-load-balancer-controller
 resource "helm_release" "load_balancer_controller" {
   name       = "aws-load-balancer-controller"
   chart      = "aws-load-balancer-controller"

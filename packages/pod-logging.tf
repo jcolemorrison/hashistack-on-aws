@@ -1,3 +1,4 @@
+# https://artifacthub.io/packages/helm/aws/aws-for-fluent-bit
 resource "kubernetes_namespace" "aws_for_fluent_bit" {
   metadata {
     name = "aws-for-fluent-bit"

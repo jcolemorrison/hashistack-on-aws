@@ -29,6 +29,12 @@ variable "ec2_kepair_name" {
   description = "The name of the EC2 key pair to use for remote access."
 }
 
+variable "remote_access_cidr_block" {
+  type        = string
+  description = "CIDR block for remote access."
+  default     = "0.0.0.0/0"
+}
+
 variable "eks_cluster_version" {
   type        = string
   description = "The version of Kubernetes for EKS to use."
