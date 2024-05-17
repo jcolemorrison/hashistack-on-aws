@@ -66,3 +66,15 @@ variable "hcp_consul_public_endpoint" {
   description = "Whether to create a public endpoint for the Consul cluster."
   default     = true
 }
+
+variable "hcp_vault_tier" {
+  type        = string
+  description = "The tier of the HCP Vault cluster. https://developer.hashicorp.com/hcp/docs/vault/get-started/deployment-considerations/tiers-and-features"
+  default     = "plus_small"
+}
+
+variable "hcp_vault_public_endpoint" {
+  type        = bool
+  description = "Whether to create a public endpoint for the Vault cluster."
+  default     = true
+}
