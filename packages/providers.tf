@@ -52,3 +52,9 @@ provider "helm" {
     token                  = data.aws_eks_cluster_auth.main.token
   }
 }
+
+provider "vault" {
+  address = local.hcp_vault_private_endpoint
+  token   = local.hcp_vault_cluster_bootstrap_token
+  namespace = local.hcp_vault_namespace
+}

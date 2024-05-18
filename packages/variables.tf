@@ -91,6 +91,12 @@ variable "hcp_vault_cluster_bootstrap_token" {
   default     = null
 }
 
+variable "hcp_vault_namespace" {
+  type        = string
+  description = "The namespace for the HCP Vault cluster."
+  default     = null
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {

@@ -71,3 +71,8 @@ output "hcp_vault_cluster_bootstrap_token" {
   description = "Bootstrap token for the HCP Vault cluster"
   sensitive   = true
 }
+
+output "hcp_vault_namespace" {
+  value       = hcp_vault_cluster.main.namespace
+  description = "value of the namespace for the HCP Vault cluster"
+}
