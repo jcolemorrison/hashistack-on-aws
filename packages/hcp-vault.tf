@@ -20,4 +20,6 @@ resource "helm_release" "vault" {
     name  = "global.externalVaultAddr"
     value = local.hcp_vault_private_endpoint
   }
+
+  depends_on = [aws_eks_addon.vpc_cni]
 }

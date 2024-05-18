@@ -18,6 +18,7 @@ module "eks_blueprints_addons" {
   }
 }
 
+# Required for HCP Vault
 resource "aws_eks_addon" "vpc_cni" {
   cluster_name = data.aws_eks_cluster.main.id
   addon_name   = "vpc-cni"
