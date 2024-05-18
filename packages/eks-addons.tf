@@ -18,7 +18,7 @@ module "eks_blueprints_addons" {
   }
 }
 
-# resource "aws_eks_addon" "vpc_cni" {
-#   cluster_name = data.aws_eks_cluster.main.id
-#   addon_name   = "vpc-cni"
-# }
+resource "aws_eks_addon" "vpc_cni" {
+  cluster_name = data.aws_eks_cluster.main.id
+  addon_name   = "vpc-cni"
+}
