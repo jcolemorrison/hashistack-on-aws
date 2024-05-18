@@ -6,7 +6,7 @@ check "kubernetes_secret_consul_encryption_secrets" {
     }
   }
   assert {
-    condition = can(data.kubernetes_secret.hcp_consul_encryption)
+    condition     = can(data.kubernetes_secret.hcp_consul_encryption)
     error_message = "hcp_consul_encryption kubernetes secret not found"
   }
 }
@@ -19,7 +19,7 @@ check "kubernetes_secret_consul_bootstrap" {
     }
   }
   assert {
-    condition = can(data.kubernetes_secret.hcp_consul_token)
+    condition     = can(data.kubernetes_secret.hcp_consul_token)
     error_message = "hcp_consul_token kubernetes secret not found"
   }
 }

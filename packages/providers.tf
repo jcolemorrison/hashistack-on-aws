@@ -54,7 +54,7 @@ provider "helm" {
 }
 
 provider "vault" {
-  address = local.hcp_vault_private_endpoint
-  token   = local.hcp_vault_cluster_bootstrap_token
+  address   = local.hcp_vault_private_endpoint
+  token     = local.hcp_vault_cluster_bootstrap_token
   namespace = local.hcp_vault_namespace
 }

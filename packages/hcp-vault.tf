@@ -9,7 +9,7 @@ resource "helm_release" "vault" {
   namespace  = kubernetes_namespace.vault.metadata.0.name
   repository = "https://helm.releases.hashicorp.com"
   chart      = "vault"
-  version    = "0.28.0" 
+  version    = "0.28.0"
 
   set {
     name  = "injector.enabled"
