@@ -72,6 +72,16 @@ variable "hcp_consul_bootstrap_token" {
   sensitive   = true
 }
 
+variable "hcp_vault_public_endpoint" {
+  type        = string
+  description = "The public endpoint for the HCP Vault cluster."
+}
+
+variable "hcp_vault_private_endpoint" {
+  type        = string
+  description = "The private endpoint for the HCP Vault cluster."
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {
