@@ -42,3 +42,14 @@ resource "aws_route" "aws_to_hcp" {
   destination_cidr_block    = var.hvn_cidr_block
   vpc_peering_connection_id = data.hcp_aws_network_peering.main.provider_peering_id
 }
+
+# Allow HCP traffic to EKS Cluster
+resource "aws_security_group_rule" "hcp_tcp_443" {
+  security_group_id = aws_eks_cluster.cluster.vpc_config.0.cluster_security_group_id
+  type              = "ingress"
+  protocol          = "tcp"
+  from_port         = 443
+  to_port           = 443
+  cidr_blocks       = [hcp_hvn.main.cidr_block]
+  description       = "Allow Consul and Vault TCP traffic from HCP HVN to EKS"
+}
