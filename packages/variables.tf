@@ -84,6 +84,13 @@ variable "hcp_vault_private_endpoint" {
   default     = null
 }
 
+variable "hcp_vault_cluster_bootstrap_token" {
+  type        = string
+  description = "The bootstrap token for the HCP Vault cluster."
+  sensitive   = true
+  default     = null
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {

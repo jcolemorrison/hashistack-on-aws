@@ -23,6 +23,7 @@ locals {
   hcp_consul_bootstrap_token = try(data.terraform_remote_state.infrastructure.outputs.hcp_consul_bootstrap_token, var.hcp_consul_bootstrap_token)
   hcp_vault_private_endpoint = try(data.terraform_remote_state.infrastructure.outputs.hcp_vault_private_endpoint, var.hcp_vault_private_endpoint)
   hcp_vault_public_endpoint = try(data.terraform_remote_state.infrastructure.outputs.hcp_vault_public_endpoint, var.hcp_vault_public_endpoint)
+  hcp_vault_cluster_bootstrap_token = try(data.terraform_remote_state.infrastructure.outputs.hcp_vault_cluster_bootstrap_token, var.hcp_vault_cluster_bootstrap_token)
 }
 
 output "aws_lb_controller_role_arn" {
