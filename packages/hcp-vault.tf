@@ -56,8 +56,8 @@ resource "vault_auth_backend" "kubernetes" {
 
 resource "vault_kubernetes_auth_backend_config" "kubernetes" {
   backend                = vault_auth_backend.kubernetes.path
-  kubernetes_host        = var.kubernetes_endpoint
+  kubernetes_host        = local.eks_cluster_api_endpoint
   kubernetes_ca_cert     = kubernetes_secret.vault_sa_token.data["ca.crt"]
-  token_reviewer_jwt     = var.kubernetes_token
+  token_reviewer_jwt     = kubernetes_secret.vault_auth.data.token
   disable_iss_validation = "true"
 }
