@@ -75,11 +75,13 @@ variable "hcp_consul_bootstrap_token" {
 variable "hcp_vault_public_endpoint" {
   type        = string
   description = "The public endpoint for the HCP Vault cluster."
+  default     = null
 }
 
 variable "hcp_vault_private_endpoint" {
   type        = string
   description = "The private endpoint for the HCP Vault cluster."
+  default     = null
 }
 
 ### Must be set in the workspace or via the CLI
