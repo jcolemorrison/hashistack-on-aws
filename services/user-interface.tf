@@ -118,6 +118,7 @@ resource "kubernetes_manifest" "deployment_ui" {
             EOF
             "consul.hashicorp.com/connect-inject"                           = "true"
             "consul.hashicorp.com/transparent-proxy-exclude-outbound-ports" = "8200"
+            "consul.hashicorp.com/transparent-proxy-exclude-inbound-ports"  = "8080"
           }
         }
         spec = {
