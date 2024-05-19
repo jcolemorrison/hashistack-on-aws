@@ -58,3 +58,9 @@ provider "vault" {
   token     = local.hcp_vault_cluster_bootstrap_token
   namespace = local.hcp_vault_namespace
 }
+
+data "vault_auth_backends" "test" {}
+
+output "vault_auth_backends" {
+  value = data.vault_auth_backends.test.paths
+}
