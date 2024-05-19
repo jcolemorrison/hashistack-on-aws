@@ -111,6 +111,11 @@ resource "kubernetes_manifest" "deployment_ui" {
             "vault.hashicorp.com/role"                          = "appkey-role"
             "vault.hashicorp.com/agent-inject-secret-appkey"    = "secrets/data/appkey"
             "vault.hashicorp.com/namespace"                     = "admin"
+            "vault.hashicorp.com/agent-inject-template-config"  = <<EOF
+            {{- with secret "secrets/data/appkey" -}}
+              export MESSAGE="Hello from the UI Service with APP Key of {{ .Data.data.foo }}!"
+            {{- end }}
+            EOF
           }
         }
         spec = {
@@ -124,11 +129,11 @@ resource "kubernetes_manifest" "deployment_ui" {
                 {
                   name  = "NAME"
                   value = var.ui_service_name
-                },
-                {
-                  name  = "MESSAGE"
-                  value = "Hello from the UI service!"
                 }
+                # {
+                #   name  = "MESSAGE"
+                #   value = "Hello from the UI service!"
+                # }
               ]
               image = var.default_container_image
               name  = var.ui_service_name
