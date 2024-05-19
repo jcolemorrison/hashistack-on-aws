@@ -4,6 +4,13 @@ resource "kubernetes_namespace" "products" {
   }
 }
 
+resource "kubernetes_service_account" "products" {
+  metadata {
+    name      = "products"
+    namespace = "products"
+  }
+}
+
 resource "kubernetes_manifest" "service_products" {
   manifest = {
     apiVersion = "v1"
@@ -103,7 +110,7 @@ resource "kubernetes_manifest" "deployment_products" {
               ]
             },
           ]
-          serviceAccountName = "appkey"
+          serviceAccountName = kubernetes_service_account.products.metadata[0].name
         }
       }
     }
