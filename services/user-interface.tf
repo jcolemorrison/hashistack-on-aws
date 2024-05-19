@@ -106,6 +106,11 @@ resource "kubernetes_manifest" "deployment_ui" {
           labels = {
             app = var.ui_service_name
           }
+          annotations = {
+            "vault.hashicorp.com/agent-inject"           = "true"
+            "vault.hashicorp.com/role"                   = "appkey-role"
+            "vault.hashicorp.com/agent-inject-appkey"    = "secret/data/appkey"
+          }
         }
         spec = {
           containers = [
@@ -143,7 +148,7 @@ resource "kubernetes_manifest" "deployment_ui" {
               }
             },
           ]
-          serviceAccountName = var.ui_service_name
+          serviceAccountName = "appkey" // var.ui_service_name
         }
       }
     }
