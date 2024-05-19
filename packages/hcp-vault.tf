@@ -61,3 +61,39 @@ resource "vault_kubernetes_auth_backend_config" "kubernetes" {
   token_reviewer_jwt     = kubernetes_secret.vault_sa_token.data.token
   disable_iss_validation = "true"
 }
+
+# Enable the KV secrets engine
+resource "vault_mount" "kvv2" {
+  path        = "secrets"
+  type        = "kv-v2"
+  options = {
+    version = "2"
+  }
+  description = "General secrets for hashistack"
+}
+
+resource "vault_kv_secret_v2" "example" {
+  mount                      = vault_mount.kvv2.path
+  name                       = "example"
+  cas                        = 1
+  delete_all_versions        = true
+
+  data_json                  = jsonencode({
+    zip       = "zap",
+    foo       = "bar"
+  })
+
+  custom_metadata {
+    max_versions = 5
+  }
+}
+
+resource "vault_policy" "example_read" {
+  name = "example-read"
+
+  policy = <<EOT
+path "secrets/data/example" {
+  capabilities = ["read"]
+}
+EOT
+}
