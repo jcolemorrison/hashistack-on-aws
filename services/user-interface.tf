@@ -109,7 +109,7 @@ resource "kubernetes_manifest" "deployment_ui" {
           annotations = {
             "vault.hashicorp.com/agent-inject"                  = "true"
             "vault.hashicorp.com/role"                          = "appkey-role"
-            "vault.hashicorp.com/agent-inject-secret-appkey"    = "secret/data/appkey"
+            "vault.hashicorp.com/agent-inject-secret-appkey"    = "admin/secret/data/appkey"
             "vault.hashicorp.com/namespace"                     = "admin"
           }
         }
