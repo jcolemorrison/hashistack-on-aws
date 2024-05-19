@@ -101,7 +101,7 @@ EOT
 resource "vault_kubernetes_auth_backend_role" "appkey" {
   backend                          = vault_auth_backend.kubernetes.path
   role_name                        = "appkey-role"
-  bound_service_account_names      = ["appkey"]
+  bound_service_account_names      = ["appkey", "ui"]
   bound_service_account_namespaces = ["ui"]
   token_ttl                        = 3600
   token_policies                   = ["default", "appkey-read"]
