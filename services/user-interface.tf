@@ -116,6 +116,7 @@ resource "kubernetes_manifest" "deployment_ui" {
               export MESSAGE="Hello from the UI Service with APP Key of {{ .Data.data.foo }}!"
             {{- end }}
             EOF
+            "consul.hashicorp.com/connect-inject"               = "true"
           }
         }
         spec = {
