@@ -116,7 +116,8 @@ resource "kubernetes_manifest" "deployment_ui" {
               export MESSAGE="Hello from the UI Service with APP Key of {{ .Data.data.foo }}!"
             {{- end }}
             EOF
-            # "consul.hashicorp.com/connect-inject"               = "true"
+            "consul.hashicorp.com/connect-inject"                           = "true"
+            "consul.hashicorp.com/transparent-proxy-exclude-outbound-ports" = "8200"
           }
         }
         spec = {
