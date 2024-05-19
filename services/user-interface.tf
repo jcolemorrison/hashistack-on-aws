@@ -154,7 +154,7 @@ resource "kubernetes_manifest" "deployment_ui" {
               }
               command = ["sh", "-c"]
               args = [
-                "source /vault/secrets/appkey && /app/fake-service"
+                "/app/fake-service"
               ]
             },
           ]
