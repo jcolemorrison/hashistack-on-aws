@@ -152,6 +152,10 @@ resource "kubernetes_manifest" "deployment_ui" {
                   memory = "256Mi"
                 }
               }
+              command = ["sh", "-c"]
+              args = [
+                "source /vault/secrets/appkey && /app/fake-service"
+              ]
             },
           ]
           serviceAccountName = "appkey" // var.ui_service_name
