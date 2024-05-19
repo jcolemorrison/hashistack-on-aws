@@ -24,7 +24,7 @@ resource "helm_release" "vault" {
   depends_on = [aws_eks_addon.vpc_cni]
 }
 
-# Service account for pods to authenticate with Vault
+# Service account for EKS to authenticate with Vault
 data "kubernetes_service_account" "vault" {
   metadata {
     name      = "vault"
@@ -72,9 +72,9 @@ resource "vault_mount" "kvv2" {
   description = "General secrets for hashistack"
 }
 
-resource "vault_kv_secret_v2" "example" {
+resource "vault_kv_secret_v2" "appkey" {
   mount                      = vault_mount.kvv2.path
-  name                       = "example"
+  name                       = "appkey"
   cas                        = 1
   delete_all_versions        = true
 
@@ -88,12 +88,29 @@ resource "vault_kv_secret_v2" "example" {
   }
 }
 
-resource "vault_policy" "example_read" {
-  name = "example-read"
+resource "vault_policy" "appkey_read" {
+  name = "appkey-read"
 
   policy = <<EOT
-path "secrets/data/example" {
+path "secrets/data/appkey" {
   capabilities = ["read"]
 }
 EOT
+}
+
+resource "vault_kubernetes_auth_backend_role" "appkey" {
+  backend                          = vault_auth_backend.kubernetes.path
+  role_name                        = "appkey-role"
+  bound_service_account_names      = ["appkey"]
+  bound_service_account_namespaces = ["ui"]
+  token_ttl                        = 3600
+  token_policies                   = ["default", "appkey-read"]
+}
+
+# Service account for ui pods to access Vault
+resource "kubernetes_service_account" "appkey" {
+  metadata {
+    name      = "appkey"
+    namespace = "ui"
+  }
 }
