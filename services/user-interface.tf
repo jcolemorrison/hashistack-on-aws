@@ -132,6 +132,10 @@ resource "kubernetes_manifest" "deployment_ui" {
                 {
                   name  = "NAME"
                   value = var.ui_service_name
+                },
+                {
+                  name  = "UPSTREAM_URIS"
+                  value = "http://products.consul.virtual"
                 }
                 # {
                 #   name  = "MESSAGE"
