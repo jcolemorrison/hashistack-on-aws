@@ -110,6 +110,7 @@ resource "kubernetes_manifest" "deployment_ui" {
             "vault.hashicorp.com/agent-inject"           = "true"
             "vault.hashicorp.com/role"                   = "appkey-role"
             "vault.hashicorp.com/agent-inject-appkey"    = "secret/data/appkey"
+            "vault.hashicorp.com/namespace"              = "admin"
           }
         }
         spec = {
