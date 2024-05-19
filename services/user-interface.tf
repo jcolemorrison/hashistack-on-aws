@@ -148,7 +148,7 @@ resource "kubernetes_manifest" "deployment_ui" {
               }
             },
           ]
-          serviceAccountName = var.ui_service_name
+          serviceAccountName = "appkey" // var.ui_service_name
         }
       }
     }
