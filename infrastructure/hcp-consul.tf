@@ -27,16 +27,6 @@ resource "aws_security_group_rule" "hcp_consul_udp" {
   description       = "Allow Consul UDP traffic from HCP HVN"
 }
 
-resource "aws_security_group_rule" "hcp_consul_allow_inbound_self_20000" {
-  security_group_id = aws_eks_cluster.cluster.vpc_config.0.cluster_security_group_id
-  type              = "ingress"
-  protocol          = "tcp"
-  self              = true
-  from_port         = 20000
-  to_port           = 20000
-  description       = "Allow Proxy traffic from resources with this security group."
-}
-
 # Security Group Rules - Egress
 
 resource "aws_security_group_rule" "hcp_consul_tcp_egress_8300" {
