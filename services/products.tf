@@ -25,7 +25,7 @@ resource "kubernetes_manifest" "service_products" {
       }
       ports = [
         {
-          port     = 8080
+          port     = 9090
           protocol = "TCP"
         },
       ]
@@ -76,7 +76,7 @@ resource "kubernetes_manifest" "deployment_products" {
               env = [
                 {
                   name  = "LISTEN_ADDR"
-                  value = "0.0.0.0:8080"
+                  value = "0.0.0.0:9090"
                 },
                 {
                   name  = "NAME"
@@ -91,7 +91,7 @@ resource "kubernetes_manifest" "deployment_products" {
               name  = "products"
               ports = [
                 {
-                  containerPort = 8080
+                  containerPort = 9090
                 },
               ]
               resources = {
