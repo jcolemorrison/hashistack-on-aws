@@ -7,9 +7,9 @@ resource "hcp_vault_cluster" "main" {
 
 # May need to be refreshed every 6 hours due to known issue:
 # https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/vault_cluster_admin_token
-resource "hcp_vault_cluster_admin_token" "bootstrap" {
-  cluster_id = hcp_vault_cluster.main.cluster_id
-}
+# resource "hcp_vault_cluster_admin_token" "bootstrap" {
+#   cluster_id = hcp_vault_cluster.main.cluster_id
+# }
 
 resource "aws_security_group_rule" "hcp_vault_tcp_egress_8200" {
   security_group_id = aws_eks_cluster.cluster.vpc_config.0.cluster_security_group_id
