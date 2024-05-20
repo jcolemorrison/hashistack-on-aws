@@ -26,7 +26,7 @@ variable "eks_cluster_name" {
 variable "ui_stack_name" {
   type        = string
   description = "The namespace / name of the UI ingress."
-  default     = "ui/ui"
+  default     = null
 }
 
 # Route53 and ACM
