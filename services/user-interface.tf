@@ -1,9 +1,3 @@
-resource "kubernetes_namespace" "ui" {
-  metadata {
-    name = var.ui_service_name
-  }
-}
-
 resource "kubernetes_manifest" "ingress_ui" {
   manifest = {
     apiVersion = "networking.k8s.io/v1"

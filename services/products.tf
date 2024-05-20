@@ -1,9 +1,3 @@
-resource "kubernetes_namespace" "products" {
-  metadata {
-    name = "products"
-  }
-}
-
 resource "kubernetes_service_account" "products" {
   metadata {
     name      = "products"
