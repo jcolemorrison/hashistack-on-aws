@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "products" {
 resource "kubernetes_service_account" "products" {
   metadata {
     name      = "products"
-    namespace = "products"
+    namespace = "default"
   }
 }
 
@@ -17,7 +17,7 @@ resource "kubernetes_manifest" "service_products" {
     kind       = "Service"
     metadata = {
       name      = "products"
-      namespace = kubernetes_namespace.products.metadata[0].name
+      namespace = "default"
     }
     spec = {
       selector = {
@@ -25,7 +25,7 @@ resource "kubernetes_manifest" "service_products" {
       }
       ports = [
         {
-          port     = 80
+          port     = 8080
           protocol = "TCP"
         },
       ]
@@ -42,7 +42,7 @@ resource "kubernetes_manifest" "deployment_products" {
         app = "products"
       }
       name      = "products"
-      namespace = kubernetes_namespace.products.metadata[0].name
+      namespace = "default"
     }
     spec = {
       replicas = 1
@@ -76,7 +76,7 @@ resource "kubernetes_manifest" "deployment_products" {
               env = [
                 {
                   name  = "LISTEN_ADDR"
-                  value = "0.0.0.0:80"
+                  value = "0.0.0.0:8080"
                 },
                 {
                   name  = "NAME"
@@ -120,7 +120,7 @@ resource "kubernetes_manifest" "deployment_products" {
 resource "kubernetes_horizontal_pod_autoscaler" "hpa_products" {
   metadata {
     name      = "products"
-    namespace = kubernetes_namespace.products.metadata[0].name
+    namespace = "default"
   }
   spec {
     max_replicas = 5
