@@ -91,7 +91,7 @@ resource "kubernetes_manifest" "deployment_products" {
               name  = "products"
               ports = [
                 {
-                  containerPort = 80
+                  containerPort = 8080
                 },
               ]
               resources = {
