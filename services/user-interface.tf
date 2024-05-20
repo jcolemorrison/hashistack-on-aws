@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "ingress_ui" {
     kind       = "Ingress"
     metadata = {
       name      = var.ui_service_name
-      namespace = kubernetes_namespace.ui.metadata[0].name
+      namespace = "default"
       annotations = var.acm_certificate_arn != null ? {
         "alb.ingress.kubernetes.io/scheme" = "internet-facing"
         "alb.ingress.kubernetes.io/target-type" = "ip"
@@ -56,7 +56,7 @@ resource "kubernetes_manifest" "service_ui" {
     kind       = "Service"
     metadata = {
       name      = var.ui_service_name
-      namespace = kubernetes_namespace.ui.metadata[0].name
+      namespace = "default"
     }
     spec = {
       selector = {
@@ -78,7 +78,7 @@ resource "kubernetes_manifest" "service_account_ui" {
     "kind"       = "ServiceAccount"
     "metadata" = {
       "name"      = var.ui_service_name
-      "namespace" = kubernetes_namespace.ui.metadata[0].name
+      "namespace" = "default"
     }
   }
 }
@@ -92,7 +92,7 @@ resource "kubernetes_manifest" "deployment_ui" {
         app = var.ui_service_name
       }
       name      = var.ui_service_name
-      namespace = kubernetes_namespace.ui.metadata[0].name
+      namespace = "default"
     }
     spec = {
       replicas = 1
@@ -175,7 +175,7 @@ resource "kubernetes_manifest" "deployment_ui" {
 resource "kubernetes_horizontal_pod_autoscaler" "hpa_ui" {
   metadata {
     name      = var.ui_service_name
-    namespace = kubernetes_namespace.ui.metadata[0].name
+    namespace = "default"
   }
   spec {
     max_replicas = 5

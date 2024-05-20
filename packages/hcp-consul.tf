@@ -97,13 +97,13 @@ resource "helm_release" "consul" {
 resource "consul_config_entry" "ui_to_products" {
   kind = "service-intentions"
   name = "products"
-  namespace = "products"
+  namespace = "default"
   partition = "default"
 
   config_json = jsonencode({
     Sources = [{
       Name   = "ui"
-      Namespace = "ui"
+      Namespace = "default"
       Partition = "default"
       Action = "allow"
     }]
@@ -113,13 +113,13 @@ resource "consul_config_entry" "ui_to_products" {
 resource "consul_config_entry" "products_to_ui" {
   kind = "service-intentions"
   name = "ui"
-  namespace = "ui"
+  namespace = "default"
   partition = "default"
 
   config_json = jsonencode({
     Sources = [{
       Name   = "products"
-      Namespace = "products"
+      Namespace = "default"
       Partition = "default"
       Action = "allow"
     }]
@@ -129,7 +129,7 @@ resource "consul_config_entry" "products_to_ui" {
 resource "consul_config_entry" "products" {
   kind = "service-defaults"
   name = "products"
-  namespace = "products"
+  namespace = "default"
 
   config_json = jsonencode({
     Protocol    = "http"
@@ -139,7 +139,7 @@ resource "consul_config_entry" "products" {
 resource "consul_config_entry" "ui" {
   kind = "service-defaults"
   name = "ui"
-  namespace = "ui"
+  namespace = "default"
 
   config_json = jsonencode({
     Protocol    = "http"
