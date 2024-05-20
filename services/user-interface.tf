@@ -135,7 +135,7 @@ resource "kubernetes_manifest" "deployment_ui" {
                 },
                 {
                   name  = "UPSTREAM_URIS"
-                  value = "http://products.service.products.hashistack.consul"
+                  value = "http://products.virtual.consul"
                 }
                 # {
                 #   name  = "MESSAGE"
