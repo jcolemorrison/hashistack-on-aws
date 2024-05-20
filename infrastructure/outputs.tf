@@ -56,6 +56,11 @@ output "hcp_consul_bootstrap_token" {
   sensitive   = true
 }
 
+output "hcp_consul_public_endpoint" {
+  value       = hcp_consul_cluster.main.consul_public_endpoint_url
+  description = "Public endpoint for the HCP Consul cluster"
+}
+
 output "hcp_vault_private_endpoint" {
   value       = hcp_vault_cluster.main.vault_private_endpoint_url
   description = "Private endpoint for the HCP Vault cluster"

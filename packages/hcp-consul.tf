@@ -93,3 +93,19 @@ resource "helm_release" "consul" {
     kubernetes_secret.hcp_consul_token
   ]
 }
+
+resource "consul_config_entry" "ui_to_products" {
+  kind = "service-intentions"
+  name = "products"
+  namespace = "products"
+  partition = "default"
+
+  config_json = jsonencode({
+    Sources = [{
+      Name   = "ui"
+      Namespace = "ui"
+      Partition = "default"
+      Action = "allow"
+    }]
+  })
+}

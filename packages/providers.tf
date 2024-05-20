@@ -20,6 +20,10 @@ terraform {
       source  = "hashicorp/vault"
       version = "~> 4.2.0"
     }
+    consul = {
+      source  = "hashicorp/consul"
+      version = "~> 2.20.0"
+    }
   }
 }
 
@@ -51,6 +55,12 @@ provider "helm" {
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.main.certificate_authority.0.data)
     token                  = data.aws_eks_cluster_auth.main.token
   }
+}
+
+provider "consul" {
+  scheme  = "https"
+  address = local.hcp_consul_public_endpoint
+  token   = local.hcp_consul_bootstrap_token
 }
 
 provider "vault" {

@@ -19,6 +19,7 @@ locals {
   eks_oidc_provider_arn             = try(data.terraform_remote_state.infrastructure.outputs.eks_oidc_provider_arn, var.eks_oidc_provider_arn)
   eks_cluster_api_endpoint          = try(data.terraform_remote_state.infrastructure.outputs.eks_cluster_api_endpoint, var.eks_cluster_api_endpoint)
   hcp_hvn_id                        = try(data.terraform_remote_state.infrastructure.outputs.hcp_hvn_id, var.hcp_hvn_id)
+  hcp_consul_public_endpoint        = try(data.terraform_remote_state.infrastructure.outputs.hcp_consul_public_endpoint, var.hcp_consul_public_endpoint)
   hcp_consul_cluster_id             = try(data.terraform_remote_state.infrastructure.outputs.hcp_consul_cluster_id, var.hcp_consul_cluster_id)
   hcp_consul_bootstrap_token        = try(data.terraform_remote_state.infrastructure.outputs.hcp_consul_bootstrap_token, var.hcp_consul_bootstrap_token)
   hcp_vault_private_endpoint        = try(data.terraform_remote_state.infrastructure.outputs.hcp_vault_private_endpoint, var.hcp_vault_private_endpoint)

@@ -61,6 +61,12 @@ variable "hcp_hvn_id" {
   description = "The HVN ID for the HCP Consul cluster."
 }
 
+variable "hcp_consul_public_endpoint" {
+  type        = string
+  description = "The public endpoint for the HCP Consul cluster."
+  default     = null
+}
+
 variable "hcp_consul_cluster_id" {
   type        = string
   description = "The ID of the HCP Consul cluster."
