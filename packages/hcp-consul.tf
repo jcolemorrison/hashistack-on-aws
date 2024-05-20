@@ -126,32 +126,37 @@ resource "consul_config_entry" "products_to_ui" {
   })
 }
 
-# resource "consul_config_entry" "products" {
-#   kind = "service-defaults"
-#   name = "products"
-#   namespace = "products"
+resource "consul_config_entry" "products" {
+  kind = "service-defaults"
+  name = "products"
+  namespace = "products"
 
-#   config_json = jsonencode({
-#     Protocol    = "http"
-#   })
-# }
+  config_json = jsonencode({
+    Protocol    = "http"
+  })
+}
 
-# resource "consul_config_entry" "proxy_defaults" {
-#   kind      = "proxy-defaults"
-#   name      = "global"
-#   partition = "default"
+resource "consul_config_entry" "ui" {
+  kind = "service-defaults"
+  name = "ui"
+  namespace = "ui"
 
-#   config_json = jsonencode({
-#     AccessLogs = {
-#       Enabled = true
-#     }
-#     Expose = {}
-#     MeshGateway = {
-#       Mode = "local"
-#     }
-#     TransparentProxy = {}
-#     Config = {
-#       Protocol = "http"
-#     }
-#   })
-# }
+  config_json = jsonencode({
+    Protocol    = "http"
+  })
+}
+
+resource "consul_config_entry" "proxy_defaults" {
+  kind      = "proxy-defaults"
+  name      = "global"
+  partition = "default"
+
+  config_json = jsonencode({
+    AccessLogs = {
+      Enabled = true
+    }
+    Config = {
+      Protocol = "http"
+    }
+  })
+}
