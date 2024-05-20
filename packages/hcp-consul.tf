@@ -110,15 +110,31 @@ resource "consul_config_entry" "ui_to_products" {
   })
 }
 
-resource "consul_config_entry" "products" {
-  kind = "service-defaults"
-  name = "products"
-  namespace = "products"
+resource "consul_config_entry" "products_to_ui" {
+  kind = "service-intentions"
+  name = "ui"
+  namespace = "ui"
+  partition = "default"
 
   config_json = jsonencode({
-    Protocol    = "http"
+    Sources = [{
+      Name   = "products"
+      Namespace = "products"
+      Partition = "default"
+      Action = "allow"
+    }]
   })
 }
+
+# resource "consul_config_entry" "products" {
+#   kind = "service-defaults"
+#   name = "products"
+#   namespace = "products"
+
+#   config_json = jsonencode({
+#     Protocol    = "http"
+#   })
+# }
 
 # resource "consul_config_entry" "proxy_defaults" {
 #   kind      = "proxy-defaults"
