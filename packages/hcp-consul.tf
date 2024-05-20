@@ -109,3 +109,13 @@ resource "consul_config_entry" "ui_to_products" {
     }]
   })
 }
+
+resource "consul_config_entry" "products" {
+  kind = "service-defaults"
+  name = "products"
+  namespace = "products"
+
+  config_json = jsonencode({
+    Protocol    = "http"
+  })
+}
