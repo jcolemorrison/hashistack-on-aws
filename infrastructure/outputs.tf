@@ -92,7 +92,18 @@ output "hcp_boundary_id" {
   description = "ID of the HCP Boundary"
 }
 
-output "hcp_boundary_cluster_url" {
+output "hcp_boundary_address" {
   value       = hcp_boundary_cluster.main.cluster_url
   description = "URL of the HCP Boundary cluster"
+}
+
+output "hcp_boundary_login_name" {
+  value       = hcp_boundary_cluster.main.username
+  description = "Login name for the HCP Boundary cluster"
+}
+
+output "hcp_boundary_login_pwd" {
+  value       = hcp_boundary_cluster.main.password
+  description = "Login name for the HCP Boundary cluster"
+  sensitive   = true
 }

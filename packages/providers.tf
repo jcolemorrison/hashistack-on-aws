@@ -24,6 +24,10 @@ terraform {
       source  = "hashicorp/consul"
       version = "~> 2.20.0"
     }
+    boundary = {
+      source  = "hashicorp/boundary"
+      version = "~> 1.1.15"
+    }
   }
 }
 
@@ -67,4 +71,10 @@ provider "vault" {
   address   = local.hcp_vault_public_endpoint # HCP TF interacts via this endpoint
   token     = local.hcp_vault_cluster_bootstrap_token
   namespace = local.hcp_vault_namespace
+}
+
+provider "boundary" {
+  addr                   = local.hcp_boundary_address
+  auth_method_login_name = local.hcp_boundary_login_name
+  auth_method_password   = local.hcp_boundary_login_pwd
 }

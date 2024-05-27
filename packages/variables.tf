@@ -103,6 +103,25 @@ variable "hcp_vault_namespace" {
   default     = null
 }
 
+variable "hcp_boundary_address" {
+  type        = string
+  description = "The address of the HCP Boundary cluster."
+  default     = null
+}
+
+variable "hcp_boundary_login_name" {
+  type        = string
+  description = "The login name for the HCP Boundary cluster."
+  default     = null
+}
+
+variable "hcp_boundary_login_pwd" {
+  type        = string
+  description = "The login password for the HCP Boundary cluster."
+  sensitive   = true
+  default     = null
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {
