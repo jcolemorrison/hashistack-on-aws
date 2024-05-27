@@ -122,4 +122,6 @@ resource "aws_instance" "boundary_worker" {
     WORKER_TAGS         = jsonencode(var.hcp_boundary_worker_tags)
     WORKER_NAME         = "${var.project_name}-worker-${count.index}"
   })
+
+  user_data_replace_on_change = true
 }
