@@ -45,7 +45,7 @@ resource "boundary_host_set_plugin" "eks_nodes" {
 }
 
 # Workers
-data "worker_auth_token" "token" {
+data "aws_ssm_parameter" "worker_auth_token" {
   count = local.hcp_boundary_worker_count
   name = "/boundary/worker/hashistack-worker-${count.index}"
 }
@@ -53,7 +53,7 @@ data "worker_auth_token" "token" {
 resource "boundary_worker" "worker_led" {
   count                       = local.hcp_boundary_worker_count
   scope_id                    = "global"
-  name                        = "worker 2"
+  name                        = "worker-${count.index}"
   description                 = "self managed worker with worker led auth"
-  worker_generated_auth_token = data.worker_auth_token.token[count.index].value
+  worker_generated_auth_token = data.aws_ssm_parameter.worker_auth_token[count.index].value
 }
