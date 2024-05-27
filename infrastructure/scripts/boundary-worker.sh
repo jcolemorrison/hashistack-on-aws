@@ -61,5 +61,11 @@ systemctl daemon-reload
 systemctl enable boundary
 systemctl start boundary
 
+# Wait for the auth_request_token file to be created
+while [ ! -f /etc/boundary/auth_request_token ]; do
+  echo "Waiting for auth_request_token file to be created..."
+  sleep 5
+done
+
 # Store worker auth token in SSM
 aws ssm put-parameter --name "/boundary/worker/${WORKER_NAME}" --value "$(cat /etc/boundary/auth_request_token)" --type "SecureString" --overwrite
