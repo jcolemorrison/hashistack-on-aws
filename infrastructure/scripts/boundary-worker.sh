@@ -4,8 +4,11 @@ yum install -y yum-utils shadow-utils
 yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 yum -y install boundary-enterprise
 
-# Get the public IP address
-PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+# Get token for fetching metadata
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+
+# Use the token to fetch the public IP address
+PUBLIC_IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s "http://169.254.169.254/latest/meta-data/public-ipv4")
 
 # Create the Boundary configuration directory
 mkdir -p /etc/boundary
