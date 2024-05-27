@@ -97,7 +97,7 @@ data "aws_ssm_parameter" "al2023" {
 resource "aws_instance" "boundary_worker" {
   count                       = var.hcp_boundary_worker_count
 
-  ami                         = data.aws_ami.ubuntu.id
+  ami                         = data.aws_ssm_parameter.al2023.value
   associate_public_ip_address = true
   instance_type               = "t3.micro"
   iam_instance_profile        = aws_iam_instance_profile.boundary_worker_profile.name
