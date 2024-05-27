@@ -39,7 +39,8 @@ data "aws_iam_policy_document" "boundary_worker_permissions_policy" {
       "ssm:PutParameter",
       "ssm:GetParameter",
       "ssm:GetParameters",
-      "ssm:GetParametersByPath"
+      "ssm:GetParametersByPath",
+      "ssm:DeleteParameter"
     ]
     resources = ["arn:${data.aws_partition.current.partition}:ssm:${var.aws_default_region}:${data.aws_caller_identity.current.account_id}:parameter/boundary/worker/*"]
   }
@@ -93,18 +94,23 @@ data "aws_ssm_parameter" "al2023" {
   name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-arm64"
 }
 
-resource "aws_instance" "worker" {
+resource "aws_instance" "boundary_worker" {
+  count                       = var.hcp_boundary_worker_count
+
   ami                         = data.aws_ami.ubuntu.id
+  associate_public_ip_address = true
   instance_type               = "t3.micro"
   iam_instance_profile        = aws_iam_instance_profile.boundary_worker_profile.name
-  subnet_id                   = module.vpc.public_subnet_ids[0]
   key_name                    = var.ec2_kepair_name
   vpc_security_group_ids      = [aws_security_group.boundary_worker.id]
-  associate_public_ip_address = true
 
-  user_data = templatefile("${path.module}/templates/user_data.sh", {
-    boundary_cluster_id = local.boundary_cluster_id
-    region              = var.aws_default_region
-    worker_tags         = var.hcp_boundary_worker_tags
+  # constrain to number of public subnets
+  subnet_id                   = module.vpc.public_subnet_ids[count.index % 3]
+
+  user_data = templatefile("${path.module}/scripts/boundary-worker.sh", {
+    BOUNDARY_CLUSTER_ID = local.boundary_cluster_id
+    REGION              = var.aws_default_region
+    WORKER_TAGS         = jsonencode(var.hcp_boundary_worker_tags)
+    WORKER_NAME         = "${var.project_name}-worker-${count.index}"
   })
 }

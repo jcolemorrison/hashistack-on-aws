@@ -84,3 +84,9 @@ variable "hcp_boundary_worker_tags" {
   description = "Tags to apply to the Boundary worker instance."
   default     = ["worker"]
 }
+
+variable "hcp_boundary_worker_count" {
+  type        = number
+  description = "The number of Boundary worker instances to deploy."
+  default     = 2
+}
