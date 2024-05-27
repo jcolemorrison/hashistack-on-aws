@@ -16,7 +16,9 @@ locals {
   boundary_cluster_id = split(".", replace(hcp_boundary_cluster.main.cluster_url, "https://", ""))[0]
 }
 
-# Boundary Worker IAM Resources - enable Boundary Worker to access SSM
+# Boundary Worker IAM Resources - 
+
+## Boundary Worker to access SSM
 
 data "aws_iam_policy_document" "boundary_worker_trust_policy" {
   statement {
@@ -60,6 +62,34 @@ resource "aws_iam_role_policy" "boundary_worker_policy" {
 resource "aws_iam_instance_profile" "boundary_worker_profile" {
   name_prefix = "boundary-worker-"
   role        = aws_iam_role.boundary_worker.name
+}
+
+## Boundary Host Plugin IAM Resources
+
+resource "aws_iam_user" "boundary" {
+  name = "boundary"
+}
+resource "aws_iam_access_key" "boundary" {
+  user = aws_iam_user.boundary.name
+}
+
+resource "aws_iam_user_policy" "BoundaryDescribeInstances" {
+  name = "BoundaryDescribeInstances"
+  user = aws_iam_user.boundary.name
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:DescribeInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
 }
 
 # Boundary Worker Security Group

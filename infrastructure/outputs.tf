@@ -107,3 +107,12 @@ output "hcp_boundary_login_pwd" {
   description = "Login name for the HCP Boundary cluster"
   sensitive   = true
 }
+
+output "hcp_boundary_access_key_id" {
+  value = aws_iam_access_key.boundary.id
+}
+
+output "hcp_boundary_secret_access_key" {
+  value = aws_iam_access_key.boundary.secret
+  sensitive = true
+}

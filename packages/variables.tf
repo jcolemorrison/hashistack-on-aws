@@ -122,6 +122,19 @@ variable "hcp_boundary_login_pwd" {
   default     = null
 }
 
+variable "hcp_boundary_access_key_id" {
+  type        = string
+  description = "The access key ID for HCP Boundary to setup dynamic host catalogs."
+  default     = null
+}
+
+variable "hcp_boundary_secret_access_key" {
+  type        = string
+  description = "The secret access key for HCP Boundary to setup dynamic host catalogs."
+  sensitive   = true
+  default     = null
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {

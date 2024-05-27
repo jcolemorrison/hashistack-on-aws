@@ -19,9 +19,15 @@ resource "boundary_host_catalog_plugin" "aws_us_east_1" {
   description     = "Hashistack aws catalog plugin for us-east-1"
   scope_id        = boundary_scope.hashistack_project.id
   plugin_name     = "aws"
+
   attributes_json = jsonencode({ 
     region                      = "us-east-1"
     disable_credential_rotation = true
+  })
+
+  secrets_json = jsonencode({
+    access_key_id     = local.hcp_boundary_access_key_id
+    secret_access_key = local.hcp_boundary_secret_access_key
   })
 }
 

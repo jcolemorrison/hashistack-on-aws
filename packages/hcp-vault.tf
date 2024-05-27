@@ -108,9 +108,9 @@ resource "vault_kubernetes_auth_backend_role" "appkey" {
 }
 
 # Service account for ui pods to access Vault
-resource "kubernetes_service_account" "appkey" {
-  metadata {
-    name      = "appkey"
-    namespace = "ui"
-  }
-}
+# resource "kubernetes_service_account" "appkey" {
+#   metadata {
+#     name      = "appkey"
+#     namespace = "ui"
+#   }
+# }
