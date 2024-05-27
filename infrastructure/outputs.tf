@@ -81,3 +81,18 @@ output "hcp_vault_namespace" {
   value       = hcp_vault_cluster.main.namespace
   description = "value of the namespace for the HCP Vault cluster"
 }
+
+output "hcp_boundary_cluster_id" {
+  value       = hcp_boundary_cluster.main.cluster_id
+  description = "ID of the HCP Boundary cluster"
+}
+
+output "hcp_boundary_id" {
+  value       = hcp_boundary_cluster.main.id
+  description = "ID of the HCP Boundary"
+}
+
+output "hcp_boundary_cluster_url" {
+  value       = hcp_boundary_cluster.main.cluster_url
+  description = "URL of the HCP Boundary cluster"
+}

@@ -78,3 +78,9 @@ variable "hcp_vault_public_endpoint" {
   description = "Whether to create a public endpoint for the Vault cluster."
   default     = true
 }
+
+variable "hcp_boundary_worker_tags" {
+  type        = list(string)
+  description = "Tags to apply to the Boundary worker instance."
+  default     = ["worker"]
+}
