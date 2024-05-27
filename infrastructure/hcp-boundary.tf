@@ -91,7 +91,7 @@ resource "aws_security_group_rule" "allow_egress_worker" {
 
 data "aws_ssm_parameter" "al2023" {
   # name = "/aws/service/canonical/ubuntu/server/22.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
-  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-arm64"
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
 }
 
 resource "aws_instance" "boundary_worker" {
