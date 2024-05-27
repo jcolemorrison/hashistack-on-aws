@@ -116,3 +116,8 @@ output "hcp_boundary_secret_access_key" {
   value = aws_iam_access_key.boundary.secret
   sensitive = true
 }
+
+output "hcp_boundary_worker_count" {
+  value       = var.hcp_boundary_worker_count
+  description = "Number of Boundary workers to deploy"
+}

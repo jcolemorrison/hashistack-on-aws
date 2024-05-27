@@ -135,6 +135,12 @@ variable "hcp_boundary_secret_access_key" {
   default     = null
 }
 
+variable "hcp_boundary_worker_count" {
+  type        = number
+  description = "The number of Boundary workers to deploy."
+  default     = null
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {

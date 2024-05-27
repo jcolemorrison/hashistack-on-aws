@@ -1,3 +1,4 @@
+# Scopes
 resource "boundary_scope" "hashistack_org" {
   scope_id                 = "global"
   name                     = "hashistack"
@@ -14,6 +15,7 @@ resource "boundary_scope" "hashistack_project" {
   auto_create_admin_role   = true
 }
 
+# Dynamic Host Catalog - auto find EKS Nodes
 resource "boundary_host_catalog_plugin" "aws_us_east_1" {
   name            = "hashistack-aws-catalog"
   description     = "Hashistack aws catalog plugin for us-east-1"
@@ -40,4 +42,18 @@ resource "boundary_host_set_plugin" "eks_nodes" {
       "tag:eks:cluster-name=hashistack-cluster"
     ]
   })
+}
+
+# Workers
+data "worker_auth_token" "token" {
+  count = local.hcp_boundary_worker_count
+  name = "/boundary/worker/hashistack-worker-${count.index}"
+}
+
+resource "boundary_worker" "worker_led" {
+  count                       = local.hcp_boundary_worker_count
+  scope_id                    = "global"
+  name                        = "worker 2"
+  description                 = "self managed worker with worker led auth"
+  worker_generated_auth_token = data.worker_auth_token.token[count.index].value
 }
