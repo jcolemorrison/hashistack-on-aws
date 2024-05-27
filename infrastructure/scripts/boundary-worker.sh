@@ -1,11 +1,26 @@
 #!/bin/bash
 
-curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - ;\
-apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" ;\
-apt-get update && apt-get install boundary-enterprise -y
+# Install dependencies
+dnf install -y dnf-plugins-core
 
+# Add the HashiCorp repository
+cat <<- EOF > /etc/yum.repos.d/hashicorp.repo
+[hashicorp]
+name=HashiCorp Stable - $basearch
+baseurl=https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+enabled=1
+gpgcheck=1
+gpgkey=https://rpm.releases.hashicorp.com/gpg
+EOF
+
+# Install Boundary
+dnf update -y
+dnf install -y boundary-enterprise
+
+# Get the public IP address
 PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 
+# Create the Boundary configuration directory
 mkdir -p /etc/boundary
 
 # Boundary worker configuration
