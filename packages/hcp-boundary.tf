@@ -77,7 +77,7 @@ resource "boundary_credential_ssh_private_key" "eks_nodes" {
 resource "boundary_target" "eks_node" {
   name         = "eks-node"
   description  = "EKS Node Target"
-  type         = "tcp"
+  type         = "ssh"
   default_port = "22"
   scope_id     = boundary_scope.hashistack_project.id
   egress_worker_filter = "\"worker\" in \"/tags/type\""
