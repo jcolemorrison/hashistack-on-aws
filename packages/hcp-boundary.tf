@@ -57,3 +57,36 @@ resource "boundary_worker" "worker_led" {
   description                 = "self managed worker with worker led auth"
   worker_generated_auth_token = data.aws_ssm_parameter.worker_auth_token[count.index].value
 }
+
+# Credential Stores
+resource "boundary_credential_store_static" "hashistack" {
+  name        = "hashistack-credential-store"
+  description = "Static HashiStack credential store for SSH keys"
+  scope_id    = boundary_scope.hashistack_project.id
+}
+
+resource "boundary_credential_ssh_private_key" "eks_nodes" {
+  name                   = "hashistack-eks-nodes-ssh-key"
+  description            = "SSH credentials for EKS nodes"
+  credential_store_id    = boundary_credential_store_static.hashistack.id
+  username               = "ec2-user"
+  private_key            = var.hcp_boundary_ec2_key_pair_private_key
+}
+
+# Targets
+resource "boundary_target" "eks_node" {
+  name         = "eks-node"
+  description  = "EKS Node Target"
+  type         = "tcp"
+  default_port = "22"
+  scope_id     = boundary_scope.hashistack_project.id
+  egress_worker_filter = "\"worker\" in \"/tags/type\""
+
+  host_source_ids = [
+    boundary_host_set_plugin.eks_nodes.id
+  ]
+
+  brokered_credential_source_ids = [
+    boundary_credential_ssh_private_key.eks_nodes.id
+  ]
+}

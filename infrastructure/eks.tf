@@ -39,7 +39,10 @@ resource "aws_eks_node_group" "node_group" {
   remote_access {
     ec2_ssh_key = var.ec2_kepair_name // replace with your key pair name
     # TBD security groups for remote access
-    source_security_group_ids = [aws_security_group.eks_remote_access.id]
+    source_security_group_ids = [
+      aws_security_group.eks_remote_access.id,
+      aws_security_group.boundary_worker.id
+    ]
   }
 
   update_config {

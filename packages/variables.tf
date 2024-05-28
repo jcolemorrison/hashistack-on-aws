@@ -141,6 +141,12 @@ variable "hcp_boundary_worker_count" {
   default     = null
 }
 
+variable "hcp_boundary_ec2_key_pair_private_key" {
+  type        = string
+  description = "The private key for the EC2 key pair."
+  sensitive   = true
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {
