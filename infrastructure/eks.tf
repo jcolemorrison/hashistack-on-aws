@@ -41,7 +41,7 @@ resource "aws_eks_node_group" "node_group" {
     # TBD security groups for remote access
     source_security_group_ids = [
       aws_security_group.eks_remote_access.id,
-      aws_security_group.boundary_worker.id
+      # aws_security_group.boundary_worker.id
     ]
   }
 
