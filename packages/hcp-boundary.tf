@@ -42,7 +42,7 @@ resource "boundary_host_set_plugin" "eks_nodes" {
     #   "tag:eks:cluster-name=hashistack-cluster"
     # ]
     filters = [
-      "tag:boundary=hosts"
+      "tag:boundary=host"
     ]
   })
 }
@@ -83,7 +83,8 @@ resource "boundary_target" "eks_node" {
   type         = "ssh"
   default_port = "22"
   scope_id     = boundary_scope.hashistack_project.id
-  egress_worker_filter = "\"worker\" in \"/tags/type\""
+  # egress_worker_filter = "\"worker\" in \"/tags/type\""
+  ingress_worker_filter = "\"worker\" in \"/tags/type\""
 
   host_source_ids = [
     boundary_host_set_plugin.eks_nodes.id
