@@ -37,9 +37,12 @@ resource "boundary_host_set_plugin" "eks_nodes" {
   name            = "hashistack-aws-eks-nodes"
   host_catalog_id = boundary_host_catalog_plugin.aws_us_east_1.id
   attributes_json = jsonencode({
-    "filters" = [
-      "tag:eks:nodegroup-name=hashistack-node-group",
-      "tag:eks:cluster-name=hashistack-cluster"
+    # "filters" = [
+    #   "tag:eks:nodegroup-name=hashistack-node-group",
+    #   "tag:eks:cluster-name=hashistack-cluster"
+    # ]
+    filters = [
+      "tag:boundary=hosts"
     ]
   })
 }
