@@ -33,9 +33,20 @@ resource "boundary_host_catalog_plugin" "aws_us_east_1" {
   })
 }
 
+# data "aws_instances" "boundary_hosts" {
+#   instance_tags = {
+#     boundary = "host"
+#   }
+# }
+
 resource "boundary_host_set_plugin" "eks_nodes" {
   name            = "hashistack-aws-eks-nodes"
   host_catalog_id = boundary_host_catalog_plugin.aws_us_east_1.id
+  preferred_endpoints = [
+    "10.0.152.45",
+    "10.0.105.124",
+    "10.0.184.252"
+  ]
   attributes_json = jsonencode({
     # "filters" = [
     #   "tag:eks:nodegroup-name=hashistack-node-group",
