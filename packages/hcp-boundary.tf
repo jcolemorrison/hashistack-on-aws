@@ -33,20 +33,25 @@ resource "boundary_host_catalog_plugin" "aws_us_east_1" {
   })
 }
 
-# data "aws_instances" "boundary_hosts" {
-#   instance_tags = {
-#     boundary = "host"
-#   }
-# }
+data "aws_instances" "boundary_hosts" {
+  instance_tags = {
+    boundary = "host"
+  }
+}
+
+data "aws_instance" "boundary_host" {
+  for_each = toset(data.aws_instances.boundary_hosts.ids)
+  instance_id = each.key
+}
+
+locals {
+  instance_private_ips = { for id, instance in data.aws_instance.boundary_host : id => instance.private_ip }
+}
 
 resource "boundary_host_set_plugin" "eks_nodes" {
   name            = "hashistack-aws-eks-nodes"
   host_catalog_id = boundary_host_catalog_plugin.aws_us_east_1.id
-  preferred_endpoints = [
-    "cidr:10.0.152.45/32",
-    "cidr:10.0.105.124/32",
-    "cidr:10.0.184.252/32"
-  ]
+  preferred_endpoints = [for _, ip in local.instance_private_ips : "cidr:${ip}/32"]
   attributes_json = jsonencode({
     # "filters" = [
     #   "tag:eks:nodegroup-name=hashistack-node-group",
