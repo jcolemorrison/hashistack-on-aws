@@ -142,25 +142,25 @@ data "aws_ssm_parameter" "al2023" {
   name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
 }
 
-# resource "aws_instance" "boundary_worker" {
-#   count                       = var.hcp_boundary_worker_count
+resource "aws_instance" "boundary_worker" {
+  count                       = var.hcp_boundary_worker_count
 
-#   ami                         = data.aws_ssm_parameter.al2023.value
-#   associate_public_ip_address = true
-#   instance_type               = "t3.micro"
-#   iam_instance_profile        = aws_iam_instance_profile.boundary_worker_profile.name
-#   key_name                    = var.ec2_kepair_name
-#   vpc_security_group_ids      = [aws_security_group.boundary_worker.id]
+  ami                         = data.aws_ssm_parameter.al2023.value
+  associate_public_ip_address = true
+  instance_type               = "t3.micro"
+  iam_instance_profile        = aws_iam_instance_profile.boundary_worker_profile.name
+  key_name                    = var.ec2_kepair_name
+  vpc_security_group_ids      = [aws_security_group.boundary_worker.id]
 
-#   # constrain to number of public subnets
-#   subnet_id                   = module.vpc.public_subnet_ids[count.index % 3]
+  # constrain to number of public subnets
+  subnet_id                   = module.vpc.public_subnet_ids[count.index % 3]
 
-#   user_data = templatefile("${path.module}/scripts/boundary-worker.sh", {
-#     BOUNDARY_CLUSTER_ID = local.boundary_cluster_id
-#     REGION              = var.aws_default_region
-#     WORKER_TAGS         = jsonencode(var.hcp_boundary_worker_tags)
-#     WORKER_NAME         = "${var.project_name}-worker-${count.index}"
-#   })
+  user_data = templatefile("${path.module}/scripts/boundary-worker.sh", {
+    BOUNDARY_CLUSTER_ID = local.boundary_cluster_id
+    REGION              = var.aws_default_region
+    WORKER_TAGS         = jsonencode(var.hcp_boundary_worker_tags)
+    WORKER_NAME         = "${var.project_name}-worker-${count.index}"
+  })
 
-#   user_data_replace_on_change = true
-# }
+  user_data_replace_on_change = true
+}
