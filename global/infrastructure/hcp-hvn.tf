@@ -24,8 +24,8 @@ resource "hcp_aws_transit_gateway_attachment" "main_tgw" {
 
 # Creates routes for each global VPC Cidr block on the HVN to the AWS Transit Gateway.
 resource "hcp_hvn_route" "route" {
-  for_each         = local.global_vpc_cidr_blocks
-  hvn_link         = hcp_hvn.main.self_link
+  for_each = local.global_vpc_cidr_blocks
+  hvn_link = hcp_hvn.main.self_link
   # can only contain letters, numbers, hypens, and be 36 chars.
   hvn_route_id     = "hvn-to-${replace(each.key, "_", "-")}"
   destination_cidr = each.value

@@ -23,7 +23,7 @@ variable "aws_default_region" {
 variable "hcp_hvn_id" {
   type        = string
   description = "The HVN ID for the HCP Consul cluster."
-  default = null
+  default     = null
 }
 
 variable "hcp_consul_public_endpoint" {
@@ -35,13 +35,14 @@ variable "hcp_consul_public_endpoint" {
 variable "hcp_consul_cluster_id" {
   type        = string
   description = "The ID of the HCP Consul cluster."
-  default = null
+  default     = null
 }
 
 variable "hcp_consul_bootstrap_token" {
   type        = string
   description = "The bootstrap token for the HCP Consul cluster."
   sensitive   = true
+  default     = null
 }
 
 variable "hcp_vault_public_endpoint" {
@@ -105,12 +106,6 @@ variable "hcp_boundary_worker_count" {
   type        = number
   description = "The number of Boundary workers to deploy."
   default     = null
-}
-
-variable "hcp_boundary_ec2_key_pair_private_key" {
-  type        = string
-  description = "The private key for the EC2 key pair."
-  sensitive   = true
 }
 
 ### Must be set in the workspace or via the CLI

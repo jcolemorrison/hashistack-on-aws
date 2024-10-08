@@ -1,7 +1,7 @@
 resource "random_password" "boundary" {
-  length      = 8
-  min_upper   = 2
-  min_lower   = 2
+  length    = 8
+  min_upper = 2
+  min_lower = 2
 }
 
 resource "hcp_boundary_cluster" "main" {
