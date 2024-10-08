@@ -1,1 +1,1 @@
-For the global infrastructure.  README pending.
+For the global infrastructure workspace.  README pending.
