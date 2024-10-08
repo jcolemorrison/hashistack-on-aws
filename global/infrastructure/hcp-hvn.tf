@@ -26,7 +26,7 @@ resource "hcp_aws_transit_gateway_attachment" "main_tgw" {
 resource "hcp_hvn_route" "route" {
   for_each         = local.global_vpc_cidr_blocks
   hvn_link         = hcp_hvn.main.self_link
-  hvn_route_id     = "${var.project_name}-hvn-to-${each.key}"
+  hvn_route_id     = "hvn-to-${each.key}"
   destination_cidr = each.value
   target_link      = hcp_aws_transit_gateway_attachment.main_tgw.self_link
 }
