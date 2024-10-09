@@ -23,7 +23,7 @@ variable "endpoint_private_access" {
 variable "eks_cluster_version" {
   description = "The version of the EKS cluster"
   type        = string
-  default     = "1.29"
+  default     = "1.30"
 }
 
 variable "node_group_desired_size" {
