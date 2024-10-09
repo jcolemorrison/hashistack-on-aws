@@ -30,6 +30,11 @@ variable "transit_gateway_id" {
   default     = null
 }
 
+variable "ec2_kepair_name" {
+  type        = string
+  description = "The name of the EC2 key pair to use for remote access in this sandbox."
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {
