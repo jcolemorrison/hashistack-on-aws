@@ -142,6 +142,8 @@ resource "aws_route" "tgw_route_public" {
   destination_cidr_block = var.accessible_cidr_blocks[count.index]
   route_table_id         = aws_route_table.public.id
   transit_gateway_id     = var.transit_gateway_id
+
+  depends_on = [ aws_ec2_transit_gateway_vpc_attachment.main ]
 }
 
 
@@ -151,4 +153,6 @@ resource "aws_route" "tgw_route_private" {
   destination_cidr_block = var.accessible_cidr_blocks[count.index]
   route_table_id         = aws_route_table.private.id
   transit_gateway_id     = var.transit_gateway_id
+
+  depends_on = [ aws_ec2_transit_gateway_vpc_attachment.main ]
 }
