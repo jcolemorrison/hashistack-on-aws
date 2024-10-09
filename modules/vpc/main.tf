@@ -127,3 +127,28 @@ resource "aws_route_table_association" "private" {
   subnet_id      = element(aws_subnet.private.*.id, count.index)
   route_table_id = aws_route_table.private.id
 }
+
+## Transit Gateway Attachments and Routing
+resource "aws_ec2_transit_gateway_vpc_attachment" "main" {
+  count              = length(var.accessible_cidr_blocks) > 0 ? 1 : 0
+  vpc_id             = aws_vpc.main.id
+  subnet_ids         = var.attach_public_subnets ? aws_subnet.public.*.id : aws_subnet.private.*.id
+  transit_gateway_id = var.transit_gateway_id
+}
+
+# Routes from public route table to transit gateway
+resource "aws_route" "tgw_route_public" {
+  count                  = length(var.accessible_cidr_blocks) > 0 ? length(var.accessible_cidr_blocks) : 0
+  destination_cidr_block = var.accessible_cidr_blocks[count.index]
+  route_table_id         = aws_route_table.public.id
+  transit_gateway_id     = var.transit_gateway_id
+}
+
+
+# Routes from private route table to transit gateway
+resource "aws_route" "tgw_route_private" {
+  count                  = length(var.accessible_cidr_blocks) > 0 ? length(var.accessible_cidr_blocks) : 0
+  destination_cidr_block = var.accessible_cidr_blocks[count.index]
+  route_table_id         = aws_route_table.private.id
+  transit_gateway_id     = var.transit_gateway_id
+}

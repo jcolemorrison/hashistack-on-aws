@@ -1,3 +1,5 @@
+# Base VPC Variables
+
 variable "name" {
   type        = string
   description = "Name use across all resources related to this VPC"
@@ -36,4 +38,24 @@ variable "tags" {
   type        = map(string)
   description = "Common tags for AWS resources"
   default     = {}
+}
+
+# Transit Gateway Attachment and Routes
+
+variable "accessible_cidr_blocks" {
+  type        = list(string)
+  description = "List of CIDR blocks to point to the transit gateway in addition to the Shared Services sandbox and HCP HVN"
+  default     = []
+}
+
+variable "attach_public_subnets" {
+  type        = bool
+  description = "Attach public subnets instead of private subnets to transit gateway"
+  default     = true
+}
+
+variable "transit_gateway_id" {
+  type        = string
+  description = "transit gateway ID to point traffic to for shared services, hcp, etc."
+  default = null
 }

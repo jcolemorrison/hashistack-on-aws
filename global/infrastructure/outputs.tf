@@ -1,4 +1,4 @@
-output "approved_vpc_cidr_blocks" {
+output "global_vpc_cidr_blocks" {
   value       = local.global_vpc_cidr_blocks
   description = "Approved VPC CIDR blocks for all sandboxes specified and managed in this project"
 }
