@@ -35,6 +35,11 @@ variable "ec2_kepair_name" {
   description = "The name of the EC2 key pair to use for remote access in this sandbox."
 }
 
+variable "public_subdomain_name" {
+  description = "The name of the public subdomain of this sandbox.  i.e. store.hashistack.com"
+  type        = string
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {

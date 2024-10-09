@@ -9,21 +9,26 @@ output "eks_cluster_api_endpoint" {
 }
 
 output "eks_cluster_role_name" {
-  description = "The name of the IAM role for the EKS cluster"
   value       = aws_iam_role.eks_cluster.name
+  description = "The name of the IAM role for the EKS cluster"
 }
 
 output "eks_node_group_role_name" {
-  description = "The name of the IAM role for the EKS node group"
   value       = aws_iam_role.eks_node_group.name
+  description = "The name of the IAM role for the EKS node group"
+}
+
+output "eks_cluster_security_group_id" {
+  value       = aws_eks_cluster.cluster.vpc_config.0.cluster_security_group_id
+  description = "The ID of the automatically created security group for the EKS cluster"
 }
 
 output "oidc_provider_url" {
-  description = "The IAM valid OIDC URL for the EKS cluster"
   value       = replace(aws_eks_cluster.cluster.identity[0].oidc[0].issuer, "https://", "")
+  description = "The IAM valid OIDC URL for the EKS cluster"
 }
 
 output "oidc_provider_arn" {
-  description = "The ARN of the IAM OIDC provider for the EKS cluster"
   value       = aws_iam_openid_connect_provider.oidc_provider.arn
+  description = "The ARN of the IAM OIDC provider for the EKS cluster"
 }
