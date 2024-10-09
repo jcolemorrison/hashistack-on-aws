@@ -1,3 +1,23 @@
+variable "project_name" {
+  type        = string
+  description = "The name of the project.  Used for naming resources."
+  default     = "hashistack-global-dns"
+}
+
+variable "aws_default_tags" {
+  type        = map(string)
+  description = "Default tags added to all AWS resources."
+  default = {
+    Project = "hashistack-global-dns"
+  }
+}
+
+variable "aws_default_region" {
+  type        = string
+  description = "The default region that all resources will be deployed into."
+  default     = "us-east-1"
+}
+
 variable "domain_name" {
   type        = string
   description = "apex domain name of all services. i.e. hashidemo.com"
