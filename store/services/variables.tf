@@ -1,14 +1,14 @@
 variable "project_name" {
   type        = string
   description = "The name of the project.  Used for naming resources."
-  default     = "hashistack-store-config"
+  default     = "hashistack-store-services"
 }
 
 variable "aws_default_tags" {
   type        = map(string)
   description = "Default tags added to all AWS resources."
   default = {
-    Project = "hashistack-store-config"
+    Project = "hashistack-store-services"
   }
 }
 
