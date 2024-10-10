@@ -24,6 +24,12 @@ variable "eks_cluster_name" {
   default     = null
 }
 
+variable "eks_node_group_name" {
+  type        = string
+  description = "The name of the EKS node group."
+  default     = null
+}
+
 variable "store_vpc_id" {
   type        = string
   description = "The ID of the store infrastructure VPC."

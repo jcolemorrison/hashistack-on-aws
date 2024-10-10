@@ -1,5 +1,6 @@
 locals {
   eks_cluster_name                   = try(data.terraform_remote_state.store_infrastructure.outputs.eks_cluster_name, var.eks_cluster_name)
+  eks_node_group_name                = try(data.terraform_remote_state.store_infrastructure.outputs.eks_node_group_name, var.eks_node_group_name)
   store_vpc_id                       = try(data.terraform_remote_state.store_infrastructure.outputs.vpc_id, var.store_vpc_id)
   store_vpc_public_subnet_ids        = try(data.terraform_remote_state.store_infrastructure.outputs.vpc_public_subnet_ids, var.store_vpc_public_subnet_ids)
   hcp_hvn_id                         = try(data.terraform_remote_state.infrastructure.outputs.hcp_hvn_id, var.hcp_hvn_id)
