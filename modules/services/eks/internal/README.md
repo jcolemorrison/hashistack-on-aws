@@ -1,0 +1,1 @@
+Module for k8s app in EKS that is internal to the cluster and not publicly exposed.
