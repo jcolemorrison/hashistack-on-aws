@@ -48,6 +48,18 @@ variable "eks_node_group_remote_access_security_group_id" {
   default     = null
 }
 
+variable "eks_cluster_oidc_provider_arn" {
+  type        = string
+  description = "The ARN of the EKS cluster OIDC provider"
+  default = null
+}
+
+variable "eks_cluster_oidc_provider_url" {
+  type        = string
+  description = "The URL of the EKS cluster OIDC provider"
+  default = null
+}
+
 # HCP Specific Variables
 
 variable "hcp_hvn_id" {

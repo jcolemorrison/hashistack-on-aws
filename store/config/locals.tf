@@ -3,6 +3,8 @@ locals {
   eks_cluster_name                               = try(data.terraform_remote_state.store_infrastructure.outputs.eks_cluster_name, var.eks_cluster_name)
   eks_node_group_name                            = try(data.terraform_remote_state.store_infrastructure.outputs.eks_node_group_name, var.eks_node_group_name)
   eks_node_group_remote_access_security_group_id = try(data.terraform_remote_state.store_infrastructure.outputs.eks_node_group_remote_access_security_group_id, var.eks_node_group_remote_access_security_group_id)
+  eks_cluster_oidc_provider_arn                  = try(data.terraform_remote_state.store_infrastructure.outputs.eks_cluster_oidc_provider_arn, var.eks_cluster_oidc_provider_arn)
+  eks_cluster_oidc_provider_url                  = try(data.terraform_remote_state.store_infrastructure.outputs.eks_cluster_oidc_provider_url, var.eks_cluster_oidc_provider_url)
   store_vpc_id                                   = try(data.terraform_remote_state.store_infrastructure.outputs.vpc_id, var.store_vpc_id)
   store_vpc_public_subnet_ids                    = try(data.terraform_remote_state.store_infrastructure.outputs.vpc_public_subnet_ids, var.store_vpc_public_subnet_ids)
   hcp_boundary_access_key_id                     = try(data.terraform_remote_state.store_infrastructure.outputs.hcp_boundary_access_key_id, var.hcp_boundary_access_key_id)

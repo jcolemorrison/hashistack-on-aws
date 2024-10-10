@@ -1,0 +1,1 @@
+Module for setting up fluent bit pod logging on EKS.
