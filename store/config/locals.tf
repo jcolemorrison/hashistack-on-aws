@@ -10,6 +10,8 @@ locals {
   store_vpc_public_subnet_ids                    = try(data.terraform_remote_state.store_infrastructure.outputs.vpc_public_subnet_ids, var.store_vpc_public_subnet_ids)
   hcp_boundary_access_key_id                     = try(data.terraform_remote_state.store_infrastructure.outputs.hcp_boundary_access_key_id, var.hcp_boundary_access_key_id)
   hcp_boundary_secret_access_key                 = try(data.terraform_remote_state.store_infrastructure.outputs.hcp_boundary_secret_access_key, var.hcp_boundary_secret_access_key)
+  subdomain_zone_id                              = try(data.terraform_remote_state.store_infrastructure.outputs.subdomain_zone_id, var.subdomain_zone_id)
+  subdomain_name                                 = try(data.terraform_remote_state.store_infrastructure.outputs.subdomain_name, var.subdomain_name)
 
   # outputs from global workspaces
   hcp_hvn_id                         = try(data.terraform_remote_state.infrastructure.outputs.hcp_hvn_id, var.hcp_hvn_id)

@@ -3,6 +3,16 @@ output "subdomain_name_servers" {
   description = "list of name servers for the subdomain"
 }
 
+output "subdomain_zone_id" {
+  value       = aws_route53_zone.subdomain.zone_id
+  description = "ID of the subdomain route53 hosted zone"
+}
+
+output "subdomain_name" {
+  value       = var.public_subdomain_name
+  description = "Name of the subdomain"
+}
+
 output "eks_cluster_name" {
   value       = module.eks_cluster.eks_cluster_name
   description = "Name of the EKS cluster"

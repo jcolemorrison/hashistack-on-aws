@@ -66,6 +66,18 @@ variable "eks_cluster_api_endpoint" {
   default     = null
 }
 
+variable "subdomain_zone_id" {
+  type        = string
+  description = "The ID of the subdomain route53 hosted zone."
+  default     = null
+}
+
+variable "subdomain_name" {
+  type        = string
+  description = "The name of the subdomain."
+  default     = null
+}
+
 # HCP Specific Variables
 
 variable "hcp_hvn_id" {

@@ -1,0 +1,1 @@
+Module for creating and validating a public certificate via ACM with Route53.
