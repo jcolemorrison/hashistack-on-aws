@@ -12,11 +12,12 @@ data "aws_iam_policy_document" "boundary_worker_trust_policy" {
 }
 
 resource "aws_iam_role" "boundary_worker" {
-  name_prefix        = "${var.project_name}-boundary-worker-"
+  name_prefix        = "boundary-worker-"
   assume_role_policy = data.aws_iam_policy_document.boundary_worker_trust_policy.json
+  description        = "IAM role for Boundary Worker in the ${var.project_name} project"
 }
 
 resource "aws_iam_instance_profile" "boundary_worker_profile" {
-  name_prefix = "${var.project_name}-boundary-worker-"
+  name_prefix = "boundary-worker-"
   role        = aws_iam_role.boundary_worker.name
 }

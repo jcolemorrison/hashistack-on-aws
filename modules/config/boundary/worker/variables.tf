@@ -45,3 +45,9 @@ variable "project_name" {
   type        = string
   description = "The name of the parent module's project"
 }
+
+variable "allow_debug_ssh" {
+  type        = bool
+  description = "Allow SSH access to the Boundary worker instances for debugging"
+  default     = false
+}

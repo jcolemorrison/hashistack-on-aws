@@ -7,4 +7,5 @@ module "boundary_worker" {
   boundary_address                = local.hcp_boundary_address
   project_name                    = var.project_name
   boundary_worker_count           = 2
+  allow_debug_ssh                 = true
 }
