@@ -14,6 +14,11 @@ resource "boundary_host_catalog_plugin" "eks_nodes" {
     access_key_id     = aws_iam_access_key.boundary.id
     secret_access_key = aws_iam_access_key.boundary.secret
   })
+
+  depends_on = [
+    aws_iam_access_key.boundary,
+    aws_iam_user_policy.BoundaryDescribeInstances
+  ]
 }
 
 # Logic to grab the private IPs of the EKS nodes
