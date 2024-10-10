@@ -41,5 +41,5 @@ resource "aws_instance" "boundary_worker_instance" {
   })
 
   # prevent constant cycling of workers, since refreshing workers requires tear down and rebuild
-  # user_data_replace_on_change = true
+  user_data_replace_on_change = false
 }
