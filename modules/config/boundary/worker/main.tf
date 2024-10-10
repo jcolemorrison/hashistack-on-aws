@@ -1,7 +1,7 @@
 resource "boundary_worker" "worker" {
   count       = var.boundary_worker_count
   scope_id    = "global"
-  name        = "worker-${count.index}"
+  name        = "${var.project_name}-worker-${count.index}"
   description = "self managed worker with controller led auth"
 }
 
@@ -32,6 +32,8 @@ resource "aws_instance" "boundary_worker_instance" {
     BOUNDARY_CLUSTER_ID                   = local.boundary_cluster_id
     REGION                                = var.aws_region
     WORKER_TAGS                           = jsonencode(var.worker_tags)
+    WORKER_PROJECT_TAG                    = jsonencode([var.project_name])
+    WORKER_REGION_TAG                     = jsonencode([var.aws_region])
     WORKER_NAME                           = "${var.project_name}-worker-${count.index}"
     CONTROLLER_GENERATED_ACTIVATION_TOKEN = boundary_worker.worker[count.index].controller_generated_activation_token
     INDEX                                 = count.index

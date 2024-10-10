@@ -29,6 +29,8 @@ worker {
   auth_storage_path = "/etc/boundary/worker-${WORKER_ID}"
   tags {
     type = ${WORKER_TAGS}
+    project = ${WORKER_PROJECT_TAG}
+    region = ${WORKER_REGION_TAG}
   }
 
   controller_generated_activation_token = "${CONTROLLER_GENERATED_ACTIVATION_TOKEN}"
