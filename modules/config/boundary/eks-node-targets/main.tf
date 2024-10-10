@@ -11,8 +11,8 @@ resource "boundary_host_catalog_plugin" "eks_nodes" {
   })
 
   secrets_json = jsonencode({
-    access_key_id     = aws_iam_access_key.boundary.id
-    secret_access_key = aws_iam_access_key.boundary.secret
+    access_key_id     = var.boundary_iam_access_key_id
+    secret_access_key = var.boundary_iam_secret_access_key
   })
 
   depends_on = [

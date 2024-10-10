@@ -10,12 +10,42 @@ module "boundary_worker" {
   allow_debug_ssh                 = true
 }
 
-# module "boundary_eks_node_targets" {
-#   source                                = "../../modules/config/boundary/eks-node-targets"
-#   aws_region                            = var.aws_default_region
-#   project_scope_id                      = local.hcp_boundary_hashistack_project_id
-#   hcp_boundary_ec2_key_pair_private_key = var.hcp_boundary_ec2_key_pair_private_key
-#   eks_node_group_name                   = local.eks_node_group_name
-#   eks_cluster_name                      = local.eks_cluster_name
-#   project_name                          = var.project_name
-# }
+# Boundary Host Plugin IAM Resources - used by dynamic host catalog plugin to rotate credentials
+
+resource "aws_iam_user" "boundary" {
+  name = "${var.project_name}-boundary"
+}
+resource "aws_iam_access_key" "boundary" {
+  user = aws_iam_user.boundary.name
+}
+
+resource "aws_iam_user_policy" "BoundaryDescribeInstances" {
+  name = "BoundaryDescribeInstances"
+  user = aws_iam_user.boundary.name
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:DescribeInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+module "boundary_eks_node_targets" {
+  source                                = "../../modules/config/boundary/eks-node-targets"
+  aws_region                            = var.aws_default_region
+  project_scope_id                      = local.hcp_boundary_hashistack_project_id
+  hcp_boundary_ec2_key_pair_private_key = var.hcp_boundary_ec2_key_pair_private_key
+  eks_node_group_name                   = local.eks_node_group_name
+  eks_cluster_name                      = local.eks_cluster_name
+  project_name                          = var.project_name
+  boundary_iam_access_key_id            = aws_iam_access_key.boundary.id
+  boundary_iam_secret_access_key        = aws_iam_access_key.boundary.secret
+}
