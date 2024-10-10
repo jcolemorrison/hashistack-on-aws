@@ -1,14 +1,14 @@
 variable "project_name" {
   type        = string
   description = "The name of the project.  Used for naming resources."
-  default     = "hashistack-global-config"
+  default     = "hashistack-store-config"
 }
 
 variable "aws_default_tags" {
   type        = map(string)
   description = "Default tags added to all AWS resources."
   default = {
-    Project = "hashistack-global-config"
+    Project = "hashistack-store-config"
   }
 }
 
@@ -18,7 +18,31 @@ variable "aws_default_region" {
   default     = "us-east-1"
 }
 
-# HCP Variables
+variable "eks_cluster_name" {
+  type        = string
+  description = "The name of the EKS cluster."
+  default     = null
+}
+
+variable "eks_cluster_name" {
+  type        = string
+  description = "The name of the EKS cluster."
+  default     = null
+}
+
+variable "store_vpc_id" {
+  type        = string
+  description = "The ID of the store infrastructure VPC."
+  default     = null
+}
+
+variable "store_vpc_public_subnet_ids" {
+  type        = list(string)
+  description = "List of public subnet IDs for the store infrastructure VPC."
+  default     = null
+}
+
+# HCP Specific Variables
 
 variable "hcp_hvn_id" {
   type        = string
@@ -89,6 +113,18 @@ variable "hcp_boundary_login_pwd" {
   default     = null
 }
 
+variable "hcp_boundary_hashistack_project_id" {
+  type        = string
+  description = "The ID of the Global Hashistack project scope"
+  default     = null
+}
+
+variable "hcp_boundary_ec2_key_pair_private_key" {
+  type        = string
+  description = "The private key for the EC2 key pair."
+  sensitive   = true
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {
@@ -97,6 +133,16 @@ variable "hcp_terraform_organization_name" {
 }
 
 variable "hcp_tf_global_infra_workspace_name" {
+  type        = string
+  description = "The name of the hashistack global aws infrastructure workspace."
+}
+
+variable "hcp_tf_global_config_workspace_name" {
+  type        = string
+  description = "The name of the hashistack global aws infrastructure workspace."
+}
+
+variable "hcp_tf_store_infra_workspace_name" {
   type        = string
   description = "The name of the hashistack global aws infrastructure workspace."
 }

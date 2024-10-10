@@ -38,6 +38,11 @@ output "eks_cluster_oidc_provider_arn" {
   description = "The ARN of the IAM OIDC provider for the EKS cluster"
 }
 
+output "vpc_id" {
+  value       = module.vpc.id
+  description = "ID of the VPC"
+}
+
 output "vpc_public_subnet_ids" {
   value       = module.vpc.public_subnet_ids
   description = "List of public subnet IDs"
