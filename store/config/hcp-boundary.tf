@@ -10,14 +10,14 @@ module "boundary_worker" {
   allow_debug_ssh                 = true
 }
 
-# module "boundary_eks_node_targets" {
-#   source                                = "../../modules/config/boundary/eks-node-targets"
-#   aws_region                            = var.aws_default_region
-#   project_scope_id                      = local.hcp_boundary_hashistack_project_id
-#   hcp_boundary_ec2_key_pair_private_key = var.hcp_boundary_ec2_key_pair_private_key
-#   eks_node_group_name                   = local.eks_node_group_name
-#   eks_cluster_name                      = local.eks_cluster_name
-#   project_name                          = var.project_name
-#   boundary_iam_access_key_id            = aws_iam_access_key.boundary.id
-#   boundary_iam_secret_access_key        = aws_iam_access_key.boundary.secret
-# }
+module "boundary_eks_node_targets" {
+  source                                = "../../modules/config/boundary/eks-node-targets"
+  aws_region                            = var.aws_default_region
+  project_scope_id                      = local.hcp_boundary_hashistack_project_id
+  hcp_boundary_ec2_key_pair_private_key = var.hcp_boundary_ec2_key_pair_private_key
+  eks_node_group_name                   = local.eks_node_group_name
+  eks_cluster_name                      = local.eks_cluster_name
+  project_name                          = var.project_name
+  boundary_iam_access_key_id            = local.hcp_boundary_access_key_id
+  boundary_iam_secret_access_key        = local.hcp_boundary_secret_access_key
+}
