@@ -61,3 +61,14 @@ resource "aws_eks_node_group" "node_group" {
     var.node_group_tags
   )
 }
+
+# Give EKS containers their own ENI
+resource "aws_eks_addon" "vpc_cni" {
+  cluster_name = aws_eks_cluster.cluster.name
+  addon_name   = "vpc-cni"
+
+  depends_on = [ 
+    aws_eks_cluster.cluster,
+    aws_eks_node_group.node_group
+  ]
+}
