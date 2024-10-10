@@ -113,9 +113,15 @@ variable "hcp_boundary_hashistack_project_id" {
   default     = null
 }
 
+variable "hcp_boundary_ec2_key_pair_name" {
+  type        = string
+  description = "The name of key for the EC2 key pair."
+  sensitive   = true
+}
+
 variable "hcp_boundary_ec2_key_pair_private_key" {
   type        = string
-  description = "The private key for the EC2 key pair."
+  description = "The raw private key for the EC2 key pair used for boundary credential stores."
   sensitive   = true
 }
 
