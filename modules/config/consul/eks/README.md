@@ -1,0 +1,1 @@
+Module for configuring Consul on EKS.
