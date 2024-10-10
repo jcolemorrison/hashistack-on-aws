@@ -57,3 +57,12 @@ output "vpc_private_subnet_ids" {
   value       = module.vpc.private_subnet_ids
   description = "List of private subnet IDs"
 }
+
+output "hcp_boundary_access_key_id" {
+  value = aws_iam_access_key.boundary.id
+}
+
+output "hcp_boundary_secret_access_key" {
+  value = aws_iam_access_key.boundary.secret
+  sensitive = true
+}

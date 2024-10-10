@@ -15,4 +15,6 @@ locals {
   hcp_boundary_login_name            = try(data.terraform_remote_state.infrastructure.outputs.hcp_boundary_login_name, var.hcp_boundary_login_name)
   hcp_boundary_login_pwd             = try(data.terraform_remote_state.infrastructure.outputs.hcp_boundary_login_pwd, var.hcp_boundary_login_pwd)
   hcp_boundary_hashistack_project_id = try(data.terraform_remote_state.config.outputs.hcp_boundary_hashistack_project_id, var.hcp_boundary_hashistack_project_id)
+  hcp_boundary_access_key_id        = try(data.terraform_remote_state.infrastructure.outputs.hcp_boundary_access_key_id, var.hcp_boundary_access_key_id)
+  hcp_boundary_secret_access_key    = try(data.terraform_remote_state.infrastructure.outputs.hcp_boundary_secret_access_key, var.hcp_boundary_secret_access_key)
 }
