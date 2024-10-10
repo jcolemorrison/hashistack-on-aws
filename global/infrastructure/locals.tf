@@ -16,5 +16,6 @@ locals {
     products_us_east_1 = "10.3.0.0/22"
     products_us_west_2 = "10.3.4.0/22"
     products_eu_west_1 = "10.3.8.0/22"
+    hcp_hvn_cidr_block = var.hvn_cidr_block
   }
 }

@@ -35,6 +35,11 @@ output "hcp_hvn_id" {
   description = "HVN ID for the HCP HVN"
 }
 
+output "hcp_hvn_cidr_block" {
+  value       = hcp_hvn.main.cidr_block
+  description = "CIDR block for the HCP HVN"
+}
+
 output "hcp_consul_cluster_id" {
   value       = hcp_consul_cluster.main.cluster_id
   description = "ID of the HCP Consul cluster"

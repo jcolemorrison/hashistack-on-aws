@@ -18,6 +18,12 @@ variable "aws_default_region" {
   default     = "us-east-1"
 }
 
+variable "hcp_hvn_cidr_block" {
+  type        = string
+  description = "Cidr block for the HCP HVN."
+  default     = null
+}
+
 variable "global_vpc_cidr_blocks" {
   type        = map(string)
   description = "Approved CIDR blocks for all sandboxes specified and managed in HashiStack."
