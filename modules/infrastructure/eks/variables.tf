@@ -29,19 +29,19 @@ variable "eks_cluster_version" {
 variable "node_group_desired_size" {
   description = "Desired number of nodes in the EKS node group"
   type        = number
-  default = 1
+  default     = 1
 }
 
 variable "node_group_max_size" {
   description = "Maximum number of nodes in the EKS node group"
   type        = number
-  default = 5
+  default     = 5
 }
 
 variable "node_group_min_size" {
   description = "Minimum number of nodes in the EKS node group"
   type        = number
-  default = 1
+  default     = 1
 }
 
 variable "eks_remote_access_ec2_kepair_name" {
@@ -57,7 +57,7 @@ variable "eks_remote_access_security_group_id" {
 variable "node_group_max_unavailable" {
   description = "Maximum number of nodes that can be unavailable during an update"
   type        = number
-  default = 1
+  default     = 1
 }
 
 variable "node_group_tags" {

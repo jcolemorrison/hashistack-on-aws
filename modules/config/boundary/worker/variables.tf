@@ -51,3 +51,9 @@ variable "allow_debug_ssh" {
   description = "Allow SSH access to the Boundary worker instances for debugging"
   default     = false
 }
+
+variable "additional_security_group_ids" {
+  type        = list(string)
+  description = "Additional security group IDs to be merged with the existing list"
+  default     = []
+}

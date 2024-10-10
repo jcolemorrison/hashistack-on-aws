@@ -33,6 +33,11 @@ output "eks_cluster_security_group_id" {
   description = "The ID of the automatically created security group for the EKS cluster"
 }
 
+output "eks_node_group_remote_access_security_group_id" {
+  value       = aws_security_group.eks_remote_access.id
+  description = "The ID of the security group for remote access to the EKS node group"
+}
+
 output "eks_cluster_oidc_provider_url" {
   value       = module.eks_cluster.oidc_provider_url
   description = "The IAM valid OIDC URL for the EKS cluster"
@@ -63,6 +68,6 @@ output "hcp_boundary_access_key_id" {
 }
 
 output "hcp_boundary_secret_access_key" {
-  value = aws_iam_access_key.boundary.secret
+  value     = aws_iam_access_key.boundary.secret
   sensitive = true
 }

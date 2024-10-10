@@ -8,6 +8,7 @@ module "boundary_worker" {
   project_name                    = var.project_name
   boundary_worker_count           = 2
   allow_debug_ssh                 = true
+  additional_security_group_ids   = [local.eks_node_group_remote_access_security_group_id]
 }
 
 module "boundary_eks_node_targets" {

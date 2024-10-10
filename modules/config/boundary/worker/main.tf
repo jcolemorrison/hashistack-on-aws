@@ -22,7 +22,7 @@ resource "aws_instance" "boundary_worker_instance" {
   instance_type               = var.boundary_worker_instance_type
   iam_instance_profile        = aws_iam_instance_profile.boundary_worker_profile.name
   key_name                    = var.boundary_worker_ec2_kepair_name
-  vpc_security_group_ids      = [aws_security_group.boundary_worker.id]
+  vpc_security_group_ids      = concat([aws_security_group.boundary_worker.id], var.additional_security_group_ids)
   hibernation                 = false # turned off for demo purposes
 
   # constrain to number of public subnets
@@ -44,6 +44,6 @@ resource "aws_instance" "boundary_worker_instance" {
 
   # prevent constant cycling of workers, since refreshing workers requires tear down and rebuild
   lifecycle {
-    ignore_changes = [ user_data ]
+    ignore_changes = [user_data]
   }
 }

@@ -9,8 +9,8 @@ resource "aws_iam_access_key" "boundary" {
 }
 
 resource "aws_iam_user_policy" "BoundaryDescribeInstances" {
-  name = "BoundaryDescribeInstances"
-  user = aws_iam_user.boundary.name
+  name   = "BoundaryDescribeInstances"
+  user   = aws_iam_user.boundary.name
   policy = <<EOF
 {
   "Version": "2012-10-17",

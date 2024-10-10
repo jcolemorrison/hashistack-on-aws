@@ -42,6 +42,12 @@ variable "store_vpc_public_subnet_ids" {
   default     = null
 }
 
+variable "eks_node_group_remote_access_security_group_id" {
+  type        = string
+  description = "The ID of the security group for remote access to the EKS node group"
+  default     = null
+}
+
 # HCP Specific Variables
 
 variable "hcp_hvn_id" {

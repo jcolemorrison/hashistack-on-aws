@@ -21,7 +21,7 @@ variable "aws_default_region" {
 variable "global_vpc_cidr_blocks" {
   type        = map(string)
   description = "Approved CIDR blocks for all sandboxes specified and managed in HashiStack."
-  default = null
+  default     = null
 }
 
 variable "transit_gateway_id" {
