@@ -40,5 +40,6 @@ resource "aws_instance" "boundary_worker_instance" {
     WORKER_ID                             = boundary_worker.worker[count.index].id
   })
 
-  user_data_replace_on_change = true
+  # prevent constant cycling of workers, since refreshing workers requires tear down and rebuild
+  # user_data_replace_on_change = true
 }
