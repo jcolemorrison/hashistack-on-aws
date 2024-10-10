@@ -23,6 +23,7 @@ resource "aws_instance" "boundary_worker_instance" {
   iam_instance_profile        = aws_iam_instance_profile.boundary_worker_profile.name
   key_name                    = var.boundary_worker_ec2_kepair_name
   vpc_security_group_ids      = [aws_security_group.boundary_worker.id]
+  hibernation                 = false # turned off for demo purposes
 
   # constrain to number of public subnets
   subnet_id = var.vpc_public_subnet_ids[count.index % 3]
