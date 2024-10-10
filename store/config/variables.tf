@@ -51,13 +51,19 @@ variable "eks_node_group_remote_access_security_group_id" {
 variable "eks_cluster_oidc_provider_arn" {
   type        = string
   description = "The ARN of the EKS cluster OIDC provider"
-  default = null
+  default     = null
 }
 
 variable "eks_cluster_oidc_provider_url" {
   type        = string
   description = "The URL of the EKS cluster OIDC provider"
-  default = null
+  default     = null
+}
+
+variable "eks_cluster_api_endpoint" {
+  type        = string
+  description = "The API endpoint of the EKS cluster"
+  default     = null
 }
 
 # HCP Specific Variables

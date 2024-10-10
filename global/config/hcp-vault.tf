@@ -23,3 +23,14 @@ resource "vault_kv_secret_v2" "appkey" {
     max_versions = 5
   }
 }
+
+
+resource "vault_policy" "appkey_read" {
+  name = "appkey-read"
+
+  policy = <<EOT
+path "secrets/data/appkey" {
+  capabilities = ["read"]
+}
+EOT
+}
