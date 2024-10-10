@@ -41,9 +41,9 @@ resource "aws_eks_node_group" "node_group" {
     ec2_ssh_key = var.eks_remote_access_ec2_kepair_name // replace with your key pair name
 
     # Note: to access the EKS managed node group security group, use aws_eks_cluster.cluster.vpc_config.0.cluster_security_group_id
-    source_security_group_ids = [
-      var.eks_remote_access_security_group_id,
-    ]
+    # source_security_group_ids = [
+    #   var.eks_remote_access_security_group_id,
+    # ]
   }
 
   update_config {
