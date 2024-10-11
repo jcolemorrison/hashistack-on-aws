@@ -11,6 +11,7 @@ module "aws_loadbalancer_controller" {
   eks_cluster_name              = local.eks_cluster_name
   eks_cluster_oidc_provider_arn = local.eks_cluster_oidc_provider_arn
   eks_cluster_oidc_provider_url = local.eks_cluster_oidc_provider_url
+  vpc_id                        = local.store_vpc_id
 }
 
 module "eks_blueprints_addons" {
