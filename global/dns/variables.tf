@@ -37,3 +37,8 @@ variable "hcp_tf_game_infra_workspace_name" {
   type        = string
   description = "The name of the HCP TF workspace for game infrastructure"
 }
+
+variable "hcp_tf_social_infra_workspace_name" {
+  type        = string
+  description = "The name of the HCP TF workspace for social infrastructure"
+}
