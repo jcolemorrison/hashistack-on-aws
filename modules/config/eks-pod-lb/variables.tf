@@ -18,3 +18,8 @@ variable "eks_cluster_oidc_provider_url" {
   type        = string
   description = "The URL of the EKS cluster OIDC provider"
 }
+
+variable "vpc_id" {
+  type        = string
+  description = "The ID of the VPC"
+}
