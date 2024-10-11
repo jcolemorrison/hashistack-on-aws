@@ -1,0 +1,1 @@
+Module for k8s app in EKS that is exposed from the cluster with an AWS Load balancer and.

@@ -30,6 +30,18 @@ variable "vault_kubernets_auth_path" {
   default     = null
 }
 
+variable "store_vpc_public_subnet_ids" {
+  type        = list(string)
+  description = "List of public subnet IDs for the store infrastructure VPC."
+  default     = null
+}
+
+variable "subdomain_certificate_arn" {
+  type        = string
+  description = "The ARN of the certificate for the subdomain."
+  default     = null
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {
