@@ -42,6 +42,27 @@ variable "subdomain_certificate_arn" {
   default     = null
 }
 
+# HCP Variables
+
+variable "hcp_consul_public_endpoint" {
+  type        = string
+  description = "The public endpoint for the HCP Consul cluster."
+  default     = null
+}
+
+variable "hcp_consul_cluster_id" {
+  type        = string
+  description = "The ID of the HCP Consul cluster."
+  default     = null
+}
+
+variable "hcp_consul_bootstrap_token" {
+  type        = string
+  description = "The bootstrap token for the HCP Consul cluster."
+  sensitive   = true
+  default     = null
+}
+
 ### Must be set in the workspace or via the CLI
 
 variable "hcp_terraform_organization_name" {
