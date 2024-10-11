@@ -1,15 +1,15 @@
-# resource "consul_config_entry" "store_to_products" {
-#   kind      = "service-intentions"
-#   name      = "products"
-#   namespace = "default"
-#   partition = "default"
+resource "consul_config_entry" "game_to_score" {
+  kind      = "service-intentions"
+  name      = "score"
+  namespace = "default"
+  partition = "default"
 
-#   config_json = jsonencode({
-#     Sources = [{
-#       Name      = "store"
-#       Namespace = "default"
-#       Partition = "default"
-#       Action    = "allow"
-#     }]
-#   })
-# }
+  config_json = jsonencode({
+    Sources = [{
+      Name      = "game"
+      Namespace = "default"
+      Partition = "default"
+      Action    = "allow"
+    }]
+  })
+}
