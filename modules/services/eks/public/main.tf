@@ -132,10 +132,6 @@ resource "kubernetes_manifest" "deployment_external" {
                   name  = "UPSTREAM_URIS"
                   value = join(",", var.upstream_uris)
                 }
-                # {
-                #   name  = "MESSAGE"
-                #   value = "Hello from the UI service!"
-                # }
               ]
               image = var.container_image
               name  = var.service_name
