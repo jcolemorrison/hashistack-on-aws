@@ -27,6 +27,7 @@ variable "public_service_lb_tags" {
 variable "subdomain_name" {
   description = "The name of the public domain name"
   type        = string
+  default     = null
 }
 
 ### Must be set in the workspace or via the CLI
