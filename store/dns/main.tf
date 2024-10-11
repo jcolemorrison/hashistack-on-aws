@@ -10,7 +10,11 @@ data "aws_lb" "lb" {
 resource "aws_route53_record" "public_domain" {
   zone_id = data.aws_route53_zone.public_subdomain_name.zone_id
   name    = local.subdomain_name
-  type    = "CNAME"
-  ttl     = 60
-  records = [data.aws_lb.lb.dns_name]
+  type    = "A"
+
+  alias {
+    name                   = data.aws_lb.lb.dns_name
+    zone_id                = data.aws_lb.lb.zone_id
+    evaluate_target_health = true
+  }
 }
