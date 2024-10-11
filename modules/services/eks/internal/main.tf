@@ -51,7 +51,7 @@ resource "kubernetes_manifest" "deployment_internal" {
             app = var.service_name
           }
           annotations = {
-            "vault.hashicorp.com/auth-path"                                 = "auth/${var.service_vault_auth_path}" # project_name/auth/kubernetes
+            "vault.hashicorp.com/auth-path"                                 = "auth/${var.service_vault_auth_path}" # uses api and requires auth/ in front of it
             "vault.hashicorp.com/agent-inject"                              = "true"
             "vault.hashicorp.com/role"                                      = var.service_vault_role      # "appkey-role"
             "vault.hashicorp.com/agent-inject-secret-appkey"                = var.service_vault_secret    # "secrets/data/appkey"
