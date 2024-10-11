@@ -50,7 +50,7 @@ resource "kubernetes_secret" "vault_sa_token" {
 # Enable Kubernetes auth method
 resource "vault_auth_backend" "kubernetes" {
   type = "kubernetes"
-  path = "${var.project_name}/auth/kubernetes"
+  path = "${var.project_name}-kubernetes"
 }
 
 resource "vault_kubernetes_auth_backend_config" "kubernetes" {
