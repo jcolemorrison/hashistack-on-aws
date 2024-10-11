@@ -42,7 +42,7 @@ variable "ec2_kepair_name" {
 }
 
 variable "public_subdomain_name" {
-  description = "The name of the public subdomain of this sandbox.  i.e. store.hashistack.com"
+  description = "The name of the public subdomain of this sandbox.  i.e. game.hashistack.com"
   type        = string
 }
 
