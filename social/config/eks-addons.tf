@@ -6,7 +6,6 @@ module "pod_logging" {
   eks_cluster_oidc_provider_url = local.eks_cluster_oidc_provider_url
 }
 
-# TBD: error with http hop limit
 module "aws_loadbalancer_controller" {
   source                        = "../../modules/config/eks-pod-lb"
   eks_cluster_name              = local.eks_cluster_name

@@ -1,5 +1,5 @@
 locals {
-  # outputs from game workspaces
+  # outputs from social workspaces
   eks_cluster_name                               = try(data.terraform_remote_state.social_infrastructure.outputs.eks_cluster_name, var.eks_cluster_name)
   eks_node_group_name                            = try(data.terraform_remote_state.social_infrastructure.outputs.eks_node_group_name, var.eks_node_group_name)
   eks_node_group_remote_access_security_group_id = try(data.terraform_remote_state.social_infrastructure.outputs.eks_node_group_remote_access_security_group_id, var.eks_node_group_remote_access_security_group_id)
