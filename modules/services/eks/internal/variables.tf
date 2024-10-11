@@ -15,6 +15,11 @@ variable "service_protocol" {
   default     = "TCP"
 }
 
+variable "service_vault_auth_path" {
+  type        = string
+  description = "The Vault auth path for the service"
+}
+
 variable "service_vault_role" {
   type        = string
   description = "The Vault role for the service"
