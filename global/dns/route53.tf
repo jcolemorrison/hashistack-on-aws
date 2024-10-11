@@ -10,3 +10,12 @@ resource "aws_route53_record" "subdomain_store" {
   ttl     = "30"
   records = data.terraform_remote_state.store_infrastructure.outputs.subdomain_name_servers
 }
+
+# DNS Delegation for each subdomain
+resource "aws_route53_record" "subdomain_game" {
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = "game.${var.domain_name}"
+  type    = "NS"
+  ttl     = "30"
+  records = data.terraform_remote_state.game_infrastructure.outputs.subdomain_name_servers
+}
