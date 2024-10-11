@@ -84,6 +84,11 @@ resource "helm_release" "consul" {
   }
 
   set {
+    name = "global.name"
+    value = var.project_name
+  }
+
+  set {
     name  = "server.enabled"
     value = false
   }

@@ -18,3 +18,8 @@ variable "helm_consul_version" {
   description = "The version of the Consul Helm chart to deploy"
   default     = "1.4.0"
 }
+
+variable "project_name" {
+  type        = string
+  description = "The name of the project"
+}
