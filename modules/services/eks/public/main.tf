@@ -58,7 +58,7 @@ resource "kubernetes_manifest" "service_external" {
       }
       ports = [
         {
-          port     = var.service_name
+          port     = var.service_port
           protocol = var.service_protocol
         },
       ]
