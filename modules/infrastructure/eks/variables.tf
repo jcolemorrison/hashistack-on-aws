@@ -29,7 +29,7 @@ variable "eks_cluster_version" {
 variable "node_group_desired_size" {
   description = "Desired number of nodes in the EKS node group"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "node_group_max_size" {
@@ -41,7 +41,7 @@ variable "node_group_max_size" {
 variable "node_group_min_size" {
   description = "Minimum number of nodes in the EKS node group"
   type        = number
-  default     = 1
+  default     = 2
 }
 
 variable "eks_remote_access_ec2_kepair_name" {
