@@ -13,3 +13,19 @@ resource "consul_config_entry" "store_to_products" {
     }]
   })
 }
+
+resource "consul_config_entry" "store_to_game" {
+  kind      = "service-intentions"
+  name      = "game"
+  namespace = "default"
+  partition = "default"
+
+  config_json = jsonencode({
+    Sources = [{
+      Name      = "store"
+      Namespace = "default"
+      Partition = "default"
+      Action    = "allow"
+    }]
+  })
+}
