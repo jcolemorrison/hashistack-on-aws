@@ -1,0 +1,1 @@
+For the store dns workspace.  Optional if you want a service with a public facing domain created from the ACM certificate.  README pending.
