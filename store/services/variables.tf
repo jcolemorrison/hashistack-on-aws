@@ -70,6 +70,11 @@ variable "hcp_terraform_organization_name" {
   description = "The name of the Terraform organization."
 }
 
+variable "hcp_tf_global_infra_workspace_name" {
+  type        = string
+  description = "The name of the hashistack global aws infrastructure workspace."
+}
+
 variable "hcp_tf_store_infra_workspace_name" {
   type        = string
   description = "The name of the hashistack store aws infrastructure workspace."
