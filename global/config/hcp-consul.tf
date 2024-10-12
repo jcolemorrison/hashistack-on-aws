@@ -95,3 +95,27 @@ resource "consul_config_entry" "allow_to_customers" {
     ]
   })
 }
+
+resource "consul_config_entry" "allow_to_leaderboard" {
+  kind      = "service-intentions"
+  name      = "leaderboard"
+  namespace = "default"
+  partition = "default"
+
+  config_json = jsonencode({
+    Sources = [
+      {
+        Name      = "score"
+        Namespace = "default"
+        Partition = "default"
+        Action    = "allow"
+      },
+      {
+        Name      = "social"
+        Namespace = "default"
+        Partition = "default"
+        Action    = "allow"
+      }
+    ]
+  })
+}
