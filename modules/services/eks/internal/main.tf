@@ -76,11 +76,11 @@ resource "kubernetes_manifest" "deployment_internal" {
                 {
                   name  = "NAME"
                   value = var.service_name
+                },
+                {
+                  name  = "UPSTREAM_URIS"
+                  value = join(",", var.upstream_uris)
                 }
-                # {
-                #   name  = "MESSAGE"
-                #   value = "Hello from the Products service!"
-                # }
               ]
               image = var.container_image
               name  = var.service_name

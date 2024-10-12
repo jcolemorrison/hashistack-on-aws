@@ -2,6 +2,13 @@ module "score" {
   source                  = "../../modules/services/eks/internal"
   service_name            = "score"
   service_vault_auth_path = local.vault_kubernets_auth_path
+  upstream_uris           = [module.leaderboard.service_uri]
+}
+
+module "leaderboard" {
+  source                  = "../../modules/services/eks/internal"
+  service_name            = "leaderboard"
+  service_vault_auth_path = local.vault_kubernets_auth_path
 }
 
 module "game" {

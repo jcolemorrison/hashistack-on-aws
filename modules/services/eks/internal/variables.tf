@@ -49,3 +49,9 @@ variable "service_entrypoint" {
   description = "The entrypoint command for the service container"
   default     = "/app/fake-service"
 }
+
+variable "upstream_uris" {
+  description = "List of upstream URIs for this service to point to"
+  type        = list(string)
+  default     = []
+}
