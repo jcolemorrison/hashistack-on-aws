@@ -21,11 +21,19 @@ resource "consul_config_entry" "store_to_comments" {
   partition = "default"
 
   config_json = jsonencode({
-    Sources = [{
-      Name      = "store"
-      Namespace = "default"
-      Partition = "default"
-      Action    = "allow"
-    }]
+    Sources = [
+      {
+        Name      = "store"
+        Namespace = "default"
+        Partition = "default"
+        Action    = "allow"
+      },
+      {
+        Name      = "social"
+        Namespace = "default"
+        Partition = "default"
+        Action    = "allow"
+      }
+    ]
   })
 }
