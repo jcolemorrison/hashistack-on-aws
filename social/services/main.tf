@@ -10,5 +10,5 @@ module "social" {
   service_vault_auth_path = local.vault_kubernets_auth_path
   public_subnet_ids       = local.vpc_public_subnet_ids
   acm_certificate_arn     = local.subdomain_certificate_arn
-  upstream_uris           = [module.comments.service_uri, "http://customers.virtual.consul", "http://leaderboard.virtual.consul"]
+  upstream_uris           = ["http://leaderboard.virtual.consul", module.comments.service_uri, "http://customers.virtual.consul"]
 }
