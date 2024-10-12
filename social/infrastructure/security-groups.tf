@@ -25,3 +25,25 @@ resource "aws_security_group_rule" "eks_remote_access_ssh_egress" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.eks_remote_access.id
 }
+
+# Inter EKS Cluster Connectivity
+
+resource "aws_security_group_rule" "allow_ingress_store_us_east_1_cidr" {
+  security_group_id = module.eks_cluster.eks_cluster_security_group_id
+  type              = "ingress"
+  protocol          = "tcp"
+  from_port         = 0
+  to_port           = 65535
+  cidr_blocks       = [local.global_vpc_cidr_blocks["store_us_east_1"]]
+  description       = "Allow traffic from the store VPC"
+}
+
+resource "aws_security_group_rule" "allow_egress_store_us_east_1_cidr" {
+  security_group_id = module.eks_cluster.eks_cluster_security_group_id
+  type              = "egress"
+  protocol          = "tcp"
+  from_port         = 0
+  to_port           = 65535
+  cidr_blocks       = [local.global_vpc_cidr_blocks["store_us_east_1"]]
+  description       = "Allow traffic from the store VPC"
+}
