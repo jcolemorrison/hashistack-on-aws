@@ -23,6 +23,8 @@ variable "domain_name" {
   description = "apex domain name of all services. i.e. hashidemo.com"
 }
 
+# HCP Variables
+
 variable "hcp_terraform_organization_name" {
   type        = string
   description = "The name of the HCP TF organization"
