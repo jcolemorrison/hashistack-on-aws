@@ -13,19 +13,3 @@ resource "consul_config_entry" "store_to_products" {
     }]
   })
 }
-
-resource "consul_config_entry" "store_to_comments" {
-  kind      = "service-intentions"
-  name      = "comments"
-  namespace = "default"
-  partition = "default"
-
-  config_json = jsonencode({
-    Sources = [{
-      Name      = "store"
-      Namespace = "default"
-      Partition = "default"
-      Action    = "allow"
-    }]
-  })
-}
