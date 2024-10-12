@@ -27,6 +27,26 @@ resource "kubernetes_manifest" "service_internal" {
   }
 }
 
+locals {
+  base_service_env_vars = [
+    {
+      name  = "LISTEN_ADDR"
+      value = "0.0.0.0:${var.service_port}"
+    },
+    {
+      name  = "NAME"
+      value = var.service_name
+    }
+  ]
+
+  upstream_uris_env_var = length(var.upstream_uris) > 0 ? [
+    {
+      name  = "UPSTREAM_URIS"
+      value = join(",", var.upstream_uris)
+    }
+  ] : []
+}
+
 resource "kubernetes_manifest" "deployment_internal" {
   manifest = {
     apiVersion = "apps/v1"
@@ -68,20 +88,7 @@ resource "kubernetes_manifest" "deployment_internal" {
         spec = {
           containers = [
             {
-              env = [
-                {
-                  name  = "LISTEN_ADDR"
-                  value = "0.0.0.0:${var.service_port}"
-                },
-                {
-                  name  = "NAME"
-                  value = var.service_name
-                },
-                {
-                  name  = "UPSTREAM_URIS"
-                  value = join(",", var.upstream_uris)
-                }
-              ]
+              env = concat(local.base_service_env_vars, local.upstream_uris_env_var)
               image = var.container_image
               name  = var.service_name
               ports = [
