@@ -17,4 +17,6 @@ locals {
     social_us_west_2 = "10.3.4.0/22"
     social_eu_west_1 = "10.3.8.0/22"
   }
+
+  github_actions_url = "token.actions.githubusercontent.com"
 }

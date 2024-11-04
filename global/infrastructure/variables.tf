@@ -61,3 +61,15 @@ variable "hcp_vault_public_endpoint" {
   description = "Whether to create a public endpoint for the Vault cluster."
   default     = true
 }
+
+variable "github_user" {
+  type        = string
+  description = "Repository with resources"
+  default     = "jcolemorrison"
+}
+
+variable "repository" {
+  type        = string
+  description = "Repository with resources"
+  default     = "hashistack-on-aws"
+}
