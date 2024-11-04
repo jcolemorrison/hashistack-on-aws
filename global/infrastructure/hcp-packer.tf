@@ -39,7 +39,7 @@ resource "hcp_vault_secrets_secret" "hcp_client_secret" {
 resource "hcp_vault_secrets_secret" "hcp_project_id" {
   app_name     = hcp_vault_secrets_app.github_actions.app_name
   secret_name  = "HCP_PROJECT_ID"
-  secret_value = hcp_service_principal.github_actions.parent
+  secret_value = hcp_vault_secrets_app.github_actions.project_id
 }
 
 resource "hcp_vault_secrets_secret" "aws_role" {
