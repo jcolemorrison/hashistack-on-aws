@@ -13,6 +13,11 @@ output "vpc_private_subnet_ids" {
   description = "List of private subnet IDs"
 }
 
+output "ssh_access_security_group_id" {
+  value       = aws_security_group.nomad_remote_access.id
+  description = "Security group for SSH access"
+}
+
 output "hcp_boundary_access_key_id" {
   value = aws_iam_access_key.boundary.id
 }
