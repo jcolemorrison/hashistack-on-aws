@@ -93,3 +93,10 @@ resource "aws_instance" "nomad_servers" {
 
   user_data = base64encode(file("${path.module}/setup.sh"))
 }
+
+check "ami_version_check" {
+  assert {
+    condition     = data.hcp_packer_artifact.nomad_server.external_identifier == one(distinct(aws_instance.nomad_servers.*.ami))
+    error_message = "Nomad servers must use the latest available AMIs from HCP Packer"
+  }
+}

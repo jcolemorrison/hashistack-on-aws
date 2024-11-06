@@ -73,4 +73,5 @@ module "nomad_node_pool" {
   default_aws_region                   = var.aws_default_region
   nomad_remote_access_ec2_keypair_name = aws_key_pair.nomad.key_name
   security_group_ids                   = [module.nomad_servers.nomad_security_group_id, aws_security_group.bastion.id]
+  node_pool_desired_size               = 3
 }
