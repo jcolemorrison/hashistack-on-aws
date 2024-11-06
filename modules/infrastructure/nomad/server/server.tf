@@ -86,6 +86,7 @@ resource "aws_instance" "nomad_servers" {
   }
 
   tags = {
+    Nomad            = true,
     Name             = "nomad-server-${count.index}"
     NomadServer      = true
     NomadServerCount = var.server_count
