@@ -4,6 +4,8 @@ data "http" "nomad" {
     attempts     = 10
     min_delay_ms = 60000
   }
+
+  depends_on = [aws_instance.nomad_servers]
 }
 
 resource "terracurl_request" "bootstrap_acl" {
