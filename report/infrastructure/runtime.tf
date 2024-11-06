@@ -12,7 +12,7 @@ module "nomad_server" {
 module "nomad_node_pool" {
   source                               = "../../modules/infrastructure/nomad/node-pool"
   project_name                         = var.project_name
-  name                                 = "standard"
+  name                                 = var.nomad_node_group_namd
   vpc_id                               = module.vpc.id
   private_subnets                      = module.vpc.private_subnet_ids
   default_aws_region                   = var.aws_default_region

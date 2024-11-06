@@ -51,3 +51,9 @@ variable "hcp_tf_global_infra_workspace_name" {
   type        = string
   description = "The name of the hashistack global aws infrastructure workspace."
 }
+
+variable "nomad_node_group_namd" {
+  type        = string
+  description = "Name of Nomad node group"
+  default     = "standard"
+}

@@ -37,3 +37,7 @@ output "nomad_token" {
   description = "Nomad bootstrap token"
   sensitive   = true
 }
+
+output "nomad_node_group_namd" {
+  value = var.nomad_node_group_namd
+}
