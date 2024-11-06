@@ -58,8 +58,9 @@ resource "aws_launch_template" "node_pool" {
     resource_type = "instance"
 
     tags = {
-      NodePool = var.name,
-      Name     = "${var.project_name}-${var.name}-node-pool"
+      NomadServer = false,
+      NodePool    = var.name,
+      Name        = "${var.project_name}-${var.name}-node-pool"
     }
   }
 
