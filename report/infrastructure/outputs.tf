@@ -39,5 +39,5 @@ output "nomad_token" {
 }
 
 output "nomad_node_group_namd" {
-  value = var.nomad_node_group_namd
+  value = var.nomad_node_group_name
 }
