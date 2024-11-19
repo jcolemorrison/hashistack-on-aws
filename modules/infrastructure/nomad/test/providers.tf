@@ -10,11 +10,15 @@ terraform {
     }
     hcp = {
       source  = "hashicorp/hcp"
-      version = "~> 0.97"
+      version = "~> 0.88"
     }
     random = {
       source  = "hashicorp/random"
       version = "~> 3.6.2"
+    }
+    terracurl = {
+      source  = "devops-rob/terracurl"
+      version = "~> 1.2.1"
     }
   }
 }
@@ -24,4 +28,7 @@ provider "aws" {
   default_tags {
     tags = var.aws_default_tags
   }
+}
+
+provider "hcp" {
 }
