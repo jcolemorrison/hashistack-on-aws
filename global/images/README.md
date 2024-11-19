@@ -5,10 +5,25 @@ to HCP Packer.
 
 They include:
 
-* `ubuntu-nomad` - Nomad, Docker, Vault, Consul
+* `nomad-server` - Nomad server configuration, Docker, Vault, Consul
+* `nomad-client` - Nomad client configuration, Docker, Vault, Consul
 
-Refer to `.github/workspaces/packer.yaml` for the workflow
-that pushes the images to AWS.
+To push the images to HCP Packer, you need to have the following
+credentials set in your environment:
 
-Note that the workflow uses dynamic credentials that federate GitHub
-Actions workload identity with AWS.
+```sh
+export HCP_CLIENT_ID=
+export HCP_CLIENT_SECRET=
+export HCP_PROJECT=
+
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_REGION=
+```
+
+Go into the directory for the image you want build
+to initialize and build Packer.
+
+```sh
+bash build.sh
+```
