@@ -27,6 +27,7 @@ module "boundary_nomad_node_targets" {
   boundary_iam_access_key_id            = local.hcp_boundary_access_key_id
   boundary_iam_secret_access_key        = local.hcp_boundary_secret_access_key
   nomad_node_group_name                 = local.nomad_node_group_name
+  boundary_storage_bucket_id            = boundary_storage_bucket.boundary.id
 }
 
 resource "boundary_storage_bucket" "boundary" {
