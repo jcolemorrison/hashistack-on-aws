@@ -78,12 +78,7 @@ resource "kubernetes_manifest" "deployment_internal" {
             "vault.hashicorp.com/namespace"                                 = var.service_vault_namespace # "admin" # for demo purposes
             "vault.hashicorp.com/template-static-secret-render-interval"    = "30s"
             "vault.hashicorp.com/agent-run-as-same-user"                    = "true"
-            "vault.hashicorp.com/agent-inject-command-config"               = <<EOF
-            {
-              "command": ["sh", "-c"],
-              "args": ["kill -TERM $(pidof fake-service)"]
-            }
-            EOF
+            "vault.hashicorp.com/agent-inject-command"                      = "kill -TERM $(pidof fake-service)"
             "vault.hashicorp.com/agent-inject-template-config"              = <<EOF
             {{- with secret "${var.service_vault_secret}" -}}
               export MESSAGE="Hello from the ${var.service_name} Service with APP Key of {{ .Data.data.foo }}!"
