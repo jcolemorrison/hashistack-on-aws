@@ -42,4 +42,10 @@ resource "boundary_storage_bucket" "boundary" {
     "secret_access_key" = "${module.boundary_session_recording.boundary_bucket_secret_access_key}"
   })
   worker_filter = "\"${var.project_name}\" in \"/tags/project\""
+
+  lifecycle {
+    ignore_changes = [
+      secrets_json,
+    ]
+  }
 }
