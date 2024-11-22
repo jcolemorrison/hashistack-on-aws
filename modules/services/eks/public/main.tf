@@ -107,9 +107,7 @@ resource "kubernetes_manifest" "deployment_external" {
             "vault.hashicorp.com/agent-share-process-namespace"             = "true"
             "vault.hashicorp.com/role"                                      = var.service_vault_role   # "appkey-role"
             "vault.hashicorp.com/agent-inject-secret-config"                = var.service_vault_secret # "secrets/data/appkey"
-            "vault.hashicorp.com/agent-inject-command-config"               = <<EOF
-            kill -TERM $(pidof fake-service)"
-            EOF
+            "vault.hashicorp.com/agent-inject-command-config"               = "kill -TERM $(pidof fake-service)"
             "vault.hashicorp.com/namespace"                                 = var.service_vault_namespace # "admin" # for demo purposes
             "vault.hashicorp.com/template-static-secret-render-interval"    = "30s"
             "vault.hashicorp.com/agent-inject-template-config"              = <<EOF
