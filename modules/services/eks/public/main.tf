@@ -103,9 +103,14 @@ resource "kubernetes_manifest" "deployment_external" {
           annotations = {
             "vault.hashicorp.com/auth-path"                                 = "auth/${var.service_vault_auth_path}" # uses api and requires auth/ in front of it
             "vault.hashicorp.com/agent-inject"                              = "true"
-            "vault.hashicorp.com/role"                                      = var.service_vault_role      # "appkey-role"
-            "vault.hashicorp.com/agent-inject-secret-appkey"                = var.service_vault_secret    # "secrets/data/appkey"
+            "vault.hashicorp.com/agent-run-as-same-user"                    = "true"
+            "vault.hashicorp.com/role"                                      = var.service_vault_role   # "appkey-role"
+            "vault.hashicorp.com/agent-inject-secret-appkey"                = var.service_vault_secret # "secrets/data/appkey"
+            "vault.hashicorp.com/agent-inject-command-appkey"               = <<EOF
+            kill -TERM $(pidof fake-service)"
+            EOF
             "vault.hashicorp.com/namespace"                                 = var.service_vault_namespace # "admin" # for demo purposes
+            "vault.hashicorp.com/template-static-secret-render-interval"    = "30s"
             "vault.hashicorp.com/agent-inject-template-config"              = <<EOF
             {{- with secret "${var.service_vault_secret}" -}}
               export MESSAGE="Hello from the ${var.service_name} Service with APP Key of {{ .Data.data.foo }}!"
@@ -135,6 +140,10 @@ resource "kubernetes_manifest" "deployment_external" {
               ]
               image = var.container_image
               name  = var.service_name
+              securityContext = {
+                runAsUser  = 1000
+                runAsGroup = 3000
+              }
               ports = [
                 {
                   containerPort = var.service_port
@@ -156,7 +165,8 @@ resource "kubernetes_manifest" "deployment_external" {
               ]
             },
           ]
-          serviceAccountName = var.service_name
+          shareProcessNamespace = true,
+          serviceAccountName    = var.service_name
         }
       }
     }

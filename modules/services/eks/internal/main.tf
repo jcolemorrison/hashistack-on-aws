@@ -73,12 +73,14 @@ resource "kubernetes_manifest" "deployment_internal" {
           annotations = {
             "vault.hashicorp.com/auth-path"                                 = "auth/${var.service_vault_auth_path}" # uses api and requires auth/ in front of it
             "vault.hashicorp.com/agent-inject"                              = "true"
-            "vault.hashicorp.com/role"                                      = var.service_vault_role      # "appkey-role"
-            "vault.hashicorp.com/agent-inject-secret-appkey"                = var.service_vault_secret    # "secrets/data/appkey"
+            "vault.hashicorp.com/agent-run-as-same-user"                    = "true"
+            "vault.hashicorp.com/role"                                      = var.service_vault_role   # "appkey-role"
+            "vault.hashicorp.com/agent-inject-secret-appkey"                = var.service_vault_secret # "secrets/data/appkey"
+            "vault.hashicorp.com/agent-inject-command-appkey"               = <<EOF
+            kill -TERM $(pidof fake-service)"
+            EOF
             "vault.hashicorp.com/namespace"                                 = var.service_vault_namespace # "admin" # for demo purposes
             "vault.hashicorp.com/template-static-secret-render-interval"    = "30s"
-            "vault.hashicorp.com/agent-run-as-same-user"                    = "true"
-            "vault.hashicorp.com/agent-inject-command"                      = "kill -TERM $(pidof fake-service)"
             "vault.hashicorp.com/agent-inject-template-config"              = <<EOF
             {{- with secret "${var.service_vault_secret}" -}}
               export MESSAGE="Hello from the ${var.service_name} Service with APP Key of {{ .Data.data.foo }}!"
@@ -91,11 +93,11 @@ resource "kubernetes_manifest" "deployment_internal" {
         spec = {
           containers = [
             {
-              env = concat(local.base_service_env_vars, local.upstream_uris_env_var)
+              env   = concat(local.base_service_env_vars, local.upstream_uris_env_var)
               image = var.container_image
               name  = var.service_name
               securityContext = {
-                runAsUser = 1000
+                runAsUser  = 1000
                 runAsGroup = 3000
               }
               ports = [
@@ -119,8 +121,8 @@ resource "kubernetes_manifest" "deployment_internal" {
               ]
             },
           ]
-          shareProcessNamespace = true
-          serviceAccountName = kubernetes_service_account.internal.metadata[0].name
+          shareProcessNamespace = true,
+          serviceAccountName    = kubernetes_service_account.internal.metadata[0].name
         }
       }
     }
