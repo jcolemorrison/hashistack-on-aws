@@ -76,6 +76,7 @@ resource "kubernetes_manifest" "deployment_internal" {
             "vault.hashicorp.com/role"                                      = var.service_vault_role      # "appkey-role"
             "vault.hashicorp.com/agent-inject-secret-appkey"                = var.service_vault_secret    # "secrets/data/appkey"
             "vault.hashicorp.com/namespace"                                 = var.service_vault_namespace # "admin" # for demo purposes
+            "vault.hashicorp.com/template-static-secret-render-interval"    = "30s"
             "vault.hashicorp.com/agent-run-as-same-user"                    = "true"
             "vault.hashicorp.com/agent-inject-command-config"               = <<EOF
             {
