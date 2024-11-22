@@ -74,9 +74,10 @@ resource "kubernetes_manifest" "deployment_internal" {
             "vault.hashicorp.com/auth-path"                                 = "auth/${var.service_vault_auth_path}" # uses api and requires auth/ in front of it
             "vault.hashicorp.com/agent-inject"                              = "true"
             "vault.hashicorp.com/agent-run-as-same-user"                    = "true"
+            "vault.hashicorp.com/agent-share-process-namespace"             = "true"
             "vault.hashicorp.com/role"                                      = var.service_vault_role   # "appkey-role"
-            "vault.hashicorp.com/agent-inject-secret-appkey"                = var.service_vault_secret # "secrets/data/appkey"
-            "vault.hashicorp.com/agent-inject-command-appkey"               = <<EOF
+            "vault.hashicorp.com/agent-inject-secret-config"                = var.service_vault_secret # "secrets/data/appkey"
+            "vault.hashicorp.com/agent-inject-command-config"               = <<EOF
             kill -TERM $(pidof fake-service)"
             EOF
             "vault.hashicorp.com/namespace"                                 = var.service_vault_namespace # "admin" # for demo purposes
@@ -121,8 +122,7 @@ resource "kubernetes_manifest" "deployment_internal" {
               ]
             },
           ]
-          shareProcessNamespace = true,
-          serviceAccountName    = kubernetes_service_account.internal.metadata[0].name
+          serviceAccountName = kubernetes_service_account.internal.metadata[0].name
         }
       }
     }
