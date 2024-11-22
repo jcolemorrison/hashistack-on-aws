@@ -8,7 +8,7 @@ resource "hcp_boundary_cluster" "main" {
   cluster_id = var.project_name
   username   = var.project_name
   password   = random_password.boundary.result
-  tier       = "standard"
+  tier       = "plus"
 }
 
 # Boundary Cluster ID
