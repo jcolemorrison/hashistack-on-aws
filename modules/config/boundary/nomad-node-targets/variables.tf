@@ -32,3 +32,9 @@ variable "nomad_node_group_name" {
   type        = string
   description = "Node group name in Nomad cluster"
 }
+
+variable "boundary_storage_bucket_id" {
+  type        = string
+  description = "Boundary storage bucket ID, enables session recording"
+  default     = null
+}

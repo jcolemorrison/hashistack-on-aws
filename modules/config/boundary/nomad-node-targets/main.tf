@@ -73,6 +73,9 @@ resource "boundary_target" "nomad_node" {
 
   ingress_worker_filter = "\"${var.project_name}\" in \"/tags/project\""
 
+  enable_session_recording = var.boundary_storage_bucket_id != null
+  storage_bucket_id        = var.boundary_storage_bucket_id
+
   host_source_ids = [
     boundary_host_set_plugin.nomad_nodes.id
   ]

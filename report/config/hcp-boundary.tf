@@ -1,3 +1,9 @@
+module "boundary_session_recording" {
+  source       = "../../modules/config/boundary/session-recording"
+  project_name = var.project_name
+  aws_region   = var.aws_default_region
+}
+
 module "boundary_worker" {
   source                          = "../../modules/config/boundary/worker"
   aws_region                      = var.aws_default_region
