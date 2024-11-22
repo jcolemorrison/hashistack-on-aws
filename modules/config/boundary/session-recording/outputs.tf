@@ -10,3 +10,7 @@ output "boundary_bucket_secret_access_key" {
   value     = aws_iam_access_key.boundary.secret
   sensitive = true
 }
+
+output "boundary_bucket" {
+  value = aws_s3_bucket.boundary.id
+}
