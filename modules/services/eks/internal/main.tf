@@ -73,7 +73,8 @@ resource "kubernetes_manifest" "deployment_internal" {
           annotations = {
             "vault.hashicorp.com/auth-path"                                 = "auth/${var.service_vault_auth_path}" # uses api and requires auth/ in front of it
             "vault.hashicorp.com/agent-inject"                              = "true"
-            "vault.hashicorp.com/agent-run-as-same-user"                    = "true"
+            "vault.hashicorp.com/agent-run-as-user"                         = 1000
+            "vault.hashicorp.com/agent-run-as-group"                        = 3000
             "vault.hashicorp.com/agent-share-process-namespace"             = "true"
             "vault.hashicorp.com/role"                                      = var.service_vault_role   # "appkey-role"
             "vault.hashicorp.com/agent-inject-secret-config"                = var.service_vault_secret # "secrets/data/appkey"
