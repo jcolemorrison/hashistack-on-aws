@@ -21,6 +21,16 @@ data "aws_iam_policy_document" "boundary" {
   statement {
     effect = "Allow"
     actions = [
+      "iam:DeleteAccessKey",
+      "iam:GetUser",
+      "iam:CreateAccessKey"
+    ]
+    resources = ["${aws_iam_user.boundary.arn}"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
       "kms:Decrypt",
       "kms:GenerateDataKey",
       "kms:DescribeKey"

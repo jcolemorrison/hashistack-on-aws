@@ -36,9 +36,6 @@ resource "boundary_storage_bucket" "boundary" {
   plugin_name     = "aws"
   bucket_name     = module.boundary_session_recording.boundary_bucket
   attributes_json = jsonencode({ "region" = "${var.aws_default_region}" })
-
-  # recommended to pass in aws secrets using a file() or using environment variables
-  # the secrets below must be generated in aws by creating a aws iam user with programmatic access
   secrets_json = jsonencode({
     "access_key_id"     = "${module.boundary_session_recording.boundary_bucket_access_key_id}",
     "secret_access_key" = "${module.boundary_session_recording.boundary_bucket_secret_access_key}"
