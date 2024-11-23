@@ -41,3 +41,16 @@ output "nomad_token" {
 output "nomad_node_group_namd" {
   value = var.nomad_node_group_name
 }
+
+output "database_url" {
+  value = aws_db_instance.report.address
+}
+
+output "database_username" {
+  value = aws_db_instance.report.username
+}
+
+output "database_password" {
+  value     = aws_db_instance.report.password
+  sensitive = true
+}

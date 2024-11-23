@@ -57,3 +57,21 @@ variable "nomad_node_group_name" {
   description = "Name of Nomad node group"
   default     = "standard"
 }
+
+variable "postgres_db_version" {
+  type        = string
+  description = "PostgreSQL database version"
+  default     = "16.4"
+}
+
+variable "db_instance_class" {
+  type        = string
+  default     = "db.t3.micro"
+  description = "Database instance class"
+}
+
+variable "db_name" {
+  type        = string
+  default     = "reports"
+  description = "Name of database"
+}
