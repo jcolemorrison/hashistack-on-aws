@@ -9,7 +9,7 @@ resource "vault_database_secret_backend_connection" "db" {
   allowed_roles = [local.database_name]
 
   postgresql {
-    connection_url = "postgresql://{{username}}:{{password}}@${local.database_url}:5432/${local.database_name}?sslmode=disable"
+    connection_url = "postgresql://{{username}}:{{password}}@${local.database_url}:5432/${local.database_name}"
     username       = local.database_username
     password       = local.database_password
   }
