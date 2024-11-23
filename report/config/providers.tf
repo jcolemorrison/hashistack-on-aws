@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/boundary"
       version = "~> 1.1.15"
     }
+    vault = {
+      source  = "hashicorp/vault"
+      version = "~> 4.5.0"
+    }
   }
 }
 
@@ -26,4 +30,10 @@ provider "boundary" {
   addr                   = local.hcp_boundary_address
   auth_method_login_name = local.hcp_boundary_login_name
   auth_method_password   = local.hcp_boundary_login_pwd
+}
+
+provider "vault" {
+  address   = local.hcp_vault_public_endpoint
+  token     = local.hcp_vault_cluster_bootstrap_token
+  namespace = local.hcp_vault_namespace
 }

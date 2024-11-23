@@ -44,6 +44,6 @@ resource "aws_instance" "boundary_worker_instance" {
 
   # prevent constant cycling of workers, since refreshing workers requires tear down and rebuild
   lifecycle {
-    ignore_changes = [user_data]
+    ignore_changes = [user_data, ami]
   }
 }

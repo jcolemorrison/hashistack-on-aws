@@ -119,3 +119,47 @@ variable "nomad_node_group_name" {
   description = "Name of Nomad node group to add to Boundary"
   default     = null
 }
+
+variable "hcp_vault_public_endpoint" {
+  type        = string
+  description = "HCP Vault public endpoint"
+  default     = null
+}
+
+variable "hcp_vault_namespace" {
+  type        = string
+  description = "HCP Vault namespace"
+  default     = null
+}
+
+variable "hcp_vault_cluster_bootstrap_token" {
+  type        = string
+  description = "HCP Vault bootstrap token"
+  default     = null
+  sensitive   = true
+}
+
+variable "database_url" {
+  type        = string
+  description = "PostgreSQL database URL from AWS RDS"
+  default     = null
+}
+
+variable "database_name" {
+  type        = string
+  description = "PostgreSQL database name from AWS RDS"
+  default     = null
+}
+
+variable "database_username" {
+  type        = string
+  description = "PostgreSQL database username from AWS RDS"
+  default     = null
+}
+
+variable "database_password" {
+  type        = string
+  description = "PostgreSQL database password from AWS RDS"
+  default     = null
+  sensitive   = true
+}
