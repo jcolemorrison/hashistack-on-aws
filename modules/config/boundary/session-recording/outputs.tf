@@ -3,11 +3,11 @@ output "boundary_session_recording_policy_arn" {
 }
 
 output "boundary_bucket_access_key_id" {
-  value = aws_iam_access_key.boundary.id
+  value = try(aws_iam_access_key.boundary.id, null)
 }
 
 output "boundary_bucket_secret_access_key" {
-  value     = aws_iam_access_key.boundary.secret
+  value     = try(aws_iam_access_key.boundary.secret, null)
   sensitive = true
 }
 
