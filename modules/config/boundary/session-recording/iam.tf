@@ -49,9 +49,9 @@ resource "aws_iam_user" "boundary" {
   name = "${var.project_name}-boundary-bucket"
 }
 
-resource "aws_iam_access_key" "boundary" {
-  user = aws_iam_user.boundary.name
-}
+# resource "aws_iam_access_key" "boundary" {
+#   user = aws_iam_user.boundary.name
+# }
 
 resource "aws_iam_user_policy_attachment" "boundary" {
   user       = aws_iam_user.boundary.name
