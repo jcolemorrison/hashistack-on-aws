@@ -49,3 +49,15 @@ resource "boundary_storage_bucket" "boundary" {
     ]
   }
 }
+
+module "boundary_database_targets" {
+  source                              = "../../modules/config/boundary/database-target"
+  project_scope_id                    = local.hcp_boundary_hashistack_project_id
+  project_name                        = var.project_name
+  database_address                    = local.database_url
+  vault_address                       = local.hcp_vault_public_endpoint
+  vault_namespace                     = local.hcp_vault_namespace
+  vault_token                         = vault_token.boundary_credentials_store.client_token
+  vault_database_static_secrets_path  = "${vault_kv_secret_v2.postgres.mount}/data/${vault_kv_secret_v2.postgres.name}"
+  vault_database_dynamic_secrets_path = "${vault_mount.db.path}/creds/${vault_database_secret_backend_role.db.name}"
+}
