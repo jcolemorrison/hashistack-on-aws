@@ -46,6 +46,10 @@ output "database_url" {
   value = aws_db_instance.report.address
 }
 
+output "database_name" {
+  value = aws_db_instance.report.db_name
+}
+
 output "database_username" {
   value = aws_db_instance.report.username
 }
