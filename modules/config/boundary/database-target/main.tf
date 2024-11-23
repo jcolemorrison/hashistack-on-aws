@@ -42,8 +42,8 @@ resource "boundary_target" "database_app" {
   name                     = "${var.project_name}-database-app"
   description              = "Application-level access to ${var.project_name} database"
   scope_id                 = var.project_scope_id
-  ingress_worker_filter    = "\"${var.project_name}\" in \"/tags/type\""
-  egress_worker_filter     = "\"${var.project_name}\" in \"/tags/type\""
+  ingress_worker_filter    = "\"${var.project_name}\" in \"/tags/project\""
+  egress_worker_filter     = "\"${var.project_name}\" in \"/tags/project\""
   session_connection_limit = -1
   default_port             = 5432
   host_source_ids = [
