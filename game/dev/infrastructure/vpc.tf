@@ -1,6 +1,6 @@
 # VPC
 module "vpc" {
-  source                 = "../../modules/vpc"
+  source                 = "../../../modules/vpc"
   cidr_block             = local.global_vpc_cidr_blocks["game_us_west_2"]
   name                   = "dev-${var.project_name}"
   transit_gateway_id     = local.transit_gateway_id

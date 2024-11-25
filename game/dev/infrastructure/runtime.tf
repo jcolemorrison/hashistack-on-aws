@@ -1,6 +1,6 @@
 # EKS Cluster
 module "eks_cluster" {
-  source                              = "../../modules/infrastructure/eks"
+  source                              = "../../../modules/infrastructure/eks"
   cluster_name                        = "dev-${var.project_name}"
   private_subnet_ids                  = module.vpc.private_subnet_ids
   eks_remote_access_ec2_kepair_name   = var.ec2_kepair_name
