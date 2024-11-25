@@ -1,0 +1,1 @@
+For the DEV game infrastructure workspace.  This is here only to demonstrate ephemeral workspaces.  Obviously not a real game yet...and also README pending.

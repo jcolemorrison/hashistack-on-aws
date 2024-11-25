@@ -13,6 +13,7 @@ locals {
     game_us_east_1   = "10.2.0.0/22"
     game_us_west_2   = "10.2.4.0/22"
     game_eu_west_1   = "10.2.8.0/22"
+    game_us_east_1_dev = "10.2.12.0/22"
     social_us_east_1 = "10.3.0.0/22"
     social_us_west_2 = "10.3.4.0/22"
     social_eu_west_1 = "10.3.8.0/22"
