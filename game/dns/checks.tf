@@ -1,6 +1,6 @@
 check "check_game_dns" {
   data "http" "game_lb_dns" {
-    url = data.aws_lb.lb.dns_name
+    url = "https://${local.subdomain_name}"
   }
 
   assert {
