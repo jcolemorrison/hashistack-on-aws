@@ -15,9 +15,9 @@ resource "boundary_scope" "hashistack_project" {
   auto_create_admin_role   = true
 }
 
-data "boundary_auth_method" "auth_method" {
+data "boundary_auth_method" "password" {
   name     = "password_auth_method"
-  scope_id = data.boundary_scope.hashistack_org.id
+  scope_id = boundary_scope.hashistack_org.id
 }
 
 resource "random_password" "waypoint" {
@@ -36,14 +36,14 @@ resource "boundary_user" "waypoint" {
   name        = "waypoint"
   description = "Temporary user to allow access via Waypoint"
   account_ids = [boundary_account_password.waypoint.id]
-  scope_id    = boundary_scope.org.id
+  scope_id    = boundary_scope.hashistack_org.id
 }
 
 resource "boundary_group" "waypoint" {
   name        = "waypoint-break-glass"
   description = "Group with access to project via Waypoint"
   member_ids  = [boundary_user.waypoint.id]
-  scope_id    = boundary_scope.project.id
+  scope_id    = boundary_scope.hashistack_project.id
 }
 
 resource "boundary_role" "org_waypoint" {
@@ -51,7 +51,7 @@ resource "boundary_role" "org_waypoint" {
   description   = "A readonly role"
   principal_ids = [boundary_user.waypoint.id]
   grant_strings = ["ids=*;type=*;actions=read"]
-  scope_id      = boundary_scope.org.id
+  scope_id      = boundary_scope.hashistack_org.id
 }
 
 resource "boundary_role" "project_waypoint" {
