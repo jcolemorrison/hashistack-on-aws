@@ -20,10 +20,10 @@ terraform {
       source  = "hashicorp/vault"
       version = "~> 4.2.0"
     }
-    consul = {
-      source  = "hashicorp/consul"
-      version = "~> 2.20.0"
-    }
+    # consul = {
+    #   source  = "hashicorp/consul"
+    #   version = "~> 2.20.0"
+    # }
     boundary = {
       source  = "hashicorp/boundary"
       version = "~> 1.1.15"
@@ -61,11 +61,11 @@ provider "helm" {
   }
 }
 
-provider "consul" {
-  scheme  = "https"
-  address = local.hcp_consul_public_endpoint
-  token   = local.hcp_consul_bootstrap_token
-}
+# provider "consul" {
+#   scheme  = "https"
+#   address = local.hcp_consul_public_endpoint
+#   token   = local.hcp_consul_bootstrap_token
+# }
 
 provider "vault" {
   address   = local.hcp_vault_public_endpoint # HCP TF interacts via this endpoint
