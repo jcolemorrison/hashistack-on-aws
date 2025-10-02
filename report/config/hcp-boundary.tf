@@ -18,17 +18,17 @@ module "boundary_worker" {
   boundary_session_recording_policy_arn = module.boundary_session_recording.boundary_session_recording_policy_arn
 }
 
-module "boundary_nomad_node_targets" {
-  source                                = "../../modules/config/boundary/nomad-node-targets"
-  aws_region                            = var.aws_default_region
-  project_scope_id                      = local.hcp_boundary_hashistack_project_id
-  hcp_boundary_ec2_key_pair_private_key = var.hcp_boundary_ec2_key_pair_private_key
-  project_name                          = var.project_name
-  boundary_iam_access_key_id            = local.hcp_boundary_access_key_id
-  boundary_iam_secret_access_key        = local.hcp_boundary_secret_access_key
-  nomad_node_group_name                 = local.nomad_node_group_name
-  boundary_storage_bucket_id            = boundary_storage_bucket.boundary.id
-}
+# module "boundary_nomad_node_targets" {
+#   source                                = "../../modules/config/boundary/nomad-node-targets"
+#   aws_region                            = var.aws_default_region
+#   project_scope_id                      = local.hcp_boundary_hashistack_project_id
+#   hcp_boundary_ec2_key_pair_private_key = var.hcp_boundary_ec2_key_pair_private_key
+#   project_name                          = var.project_name
+#   boundary_iam_access_key_id            = local.hcp_boundary_access_key_id
+#   boundary_iam_secret_access_key        = local.hcp_boundary_secret_access_key
+#   nomad_node_group_name                 = local.nomad_node_group_name
+#   boundary_storage_bucket_id            = boundary_storage_bucket.boundary.id
+# }
 
 # resource "boundary_storage_bucket" "boundary" {
 #   name            = var.project_name
